@@ -40,7 +40,7 @@
     }
 }
 .signup-form-group{
-    background-color: rgb(167, 58, 152);
+    background-color: rgba(167, 58, 152, 0.6);
     padding: 15px;
     flex-direction: column;
     border-radius: 15px;
