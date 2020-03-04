@@ -1,0 +1,150 @@
+/* *,
+*::before,
+*::after{
+
+} */
+.container{
+    /* padding: 20px; */
+    margin-top: 30px;
+    margin-left: 80px;
+    display: flex;
+    position: relative;    
+    
+}
+
+.aside{
+    position: absolute;
+    align-self: stretch;
+    float: left;
+    /* width: 30%; */
+    margin-top: 100px;
+}
+.aside p {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+@media screen and (max-width:425px) {
+    .aside{
+        width: 90%;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .aside p {
+        font-size: 19px;
+        margin-left: 40px;
+        width: auto;
+    }
+    .aside img{
+        margin-left: 60px;
+    }
+}
+.signup-form-group{
+    background-color: rgb(167, 58, 152);
+    padding: 15px;
+    flex-direction: column;
+    border-radius: 15px;
+    position: absolute;
+    align-self: stretch;
+    color: white;
+    width: 45%;
+    margin-top: 10px;
+    margin-left: 450px;
+    margin-right: 10px;
+}
+@media screen and (max-width:425px){
+    .signup-form-group{
+        margin-left: -200px;
+        margin-right: 5px;
+        margin-top: 450px;
+        width: 380px;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+}
+.signup-form-group form .sign-up-title{
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+@media screen and (max-width:425px){
+    .signup-form-group form .sign-up-title{
+        font-size: 22px;
+    }
+}
+.signup-form-group form .form-group{
+    padding-bottom: 10px;
+}
+.signup-form-group form .form-group input{
+    width: 150px;
+    height: 20px;
+    /* border-radius: 5px; */
+    padding-left: 20px;
+}
+.signup-form-group form input {
+    width: 507px;
+    /* border-radius: 5px; */
+    padding-left: 20px;
+    height: 20px;
+}
+@media screen and (max-width:425px){
+    .signup-form-group form input{
+        /* margin-left: 5px; */
+        width: 420px;
+    }
+}
+@media screen and (max-width:768px){
+    .signup-form-group{
+        padding: 10px;
+        width: 550px;
+        margin-left: 400px;
+        margin-right: 10px;
+    }
+    .signup-form-group form input{
+        width: 470px;
+    }
+}
+.signup-form-group form button{
+    width: 515px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(62, 62, 228);
+    color: white;
+    text-align: center;
+}
+@media screen and (max-width:425px){
+    .signup-form-group form button{
+        /* margin-left: 5px; */
+        width: 420px;
+    }
+}
+.signup-form-group form button a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.signup-form-group .sign-in{
+    margin-top: 10px;
+    width: 510px;
+    text-align: center;
+    height: 20px;
+    border: 0.5px solid rgba(194, 191, 191, 0.4);
+    border-radius: 5px;
+    padding: 10px;
+}
+@media screen and (max-width:425px){
+    .signup-form-group .sign-in{
+        
+        width: 420px;
+    }
+}
+.signup-form-group .sign-in a {
+    text-decoration: none;
+    color: black;
+}
+.signup-form-group .sign-in a #cancel {
+    text-decoration: none;
+    color: rgb(83, 80, 80);
+}
