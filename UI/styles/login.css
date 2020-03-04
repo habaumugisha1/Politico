@@ -1,0 +1,128 @@
+body{
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.wrapper{
+    position: relative;
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+.aside{
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    float: left;
+    width: 20%;
+}
+.aside img{
+    height: 400px;
+    margin-left: 80px;
+    border-radius: 20px;
+}
+.aside p{
+    color: white;
+    text-align: bottom;
+    position: relative;
+    margin-left: -380px;
+    width: 100%;
+    margin-top: 430px;
+}
+
+.aside .mypragra{
+    color: white;
+    text-align: bottom;
+    position: relative;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: -380px;
+    width: 100%;
+    margin-top: 430px;
+}
+.container{
+    /* position: absolute; */
+    margin-top: 100px;
+    margin-right: 80px;
+    /* margin-left: 30px; */
+    background-color: rgba(5, 5, 5, 0.4);
+    display: flex;
+    float: right;
+    width: 40%;
+    height: 50%;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.container form {
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.container form .login-title {
+    margin-left: 130px;
+    margin-top: -77px;
+    width: 100px;
+    height: 100px;
+    /* padding-bottom: 10px; */
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid blue;
+}
+.container form .login-title img{
+    
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    justify-content: center;
+}
+.container form .input{
+    margin-left: 50px;
+    margin-top: 25px;
+}
+
+.container form .input input{
+    width: 300px;
+    height: 22px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+}
+.container form .input button{
+    width: 320px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+    text-align: center;
+    background-color: blue;
+    color: white;
+}
+.container form .input button a{
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+}
+
+.container form .signup{
+    font-size: 22px; 
+    margin-left: 80px;
+    margin-top: 10px;
+    color: red;
+    
+}
+.container form .signup a{
+   
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    
+}
+.container form .signup a:hover{
+    color: green;
+    text-decoration: none;
+    font-size: 22px;
+    
+}
