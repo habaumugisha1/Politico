@@ -150,18 +150,10 @@ margin-top: 20px;
      padding: 3rem;
      display: flex;
      width: 100%;
-     /* background-color: gray; */
      box-shadow: 3px #888888;
-     /* border: 1px solid gray; */
  
  }
- /* .content .main-content:hover{
-    transform: scale(1.1); 
-    background-color: gray;
-    border-radius: 10px;
-    padding-top: 7px;
-
-} */
+ 
 
  .content .main-content .logo{
      float: left;
@@ -185,6 +177,15 @@ margin-top: 20px;
 }
 .content .main-content .description .vote{
     background-color: blue;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 3px;
+    cursor: pointer;
+    color: white;
+}
+.content .main-content .description .delete{
+    background-color: rgb(255, 38, 0);
     padding: 10px;
     border: none;
     border-radius: 6px;
