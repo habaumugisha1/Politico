@@ -1,0 +1,264 @@
+.nav-menu{
+    /* margin: auto; */
+    width: 100vw;
+    /* margin-right: 30px; */
+    height: 80px;
+    /* background: rgba(105, 122, 105, 0.3);   */
+    border-bottom: 1px solid gray;
+}
+@media screen and (max-width:425px){
+    .nav-menu{
+        height: 130px;
+    }
+}
+.logo{
+    height: 100px;
+    float: left;
+}
+
+.logo img {
+    height: 100px;
+    width: 130px;
+    margin-left: 20px;
+    margin-top: -15px;
+}
+
+.nav-menu ul {
+display: flex;
+padding: 1rem 0;
+list-style: none;
+justify-content: center;
+margin-top: 20px;
+
+}
+.nav-menu ul li{
+    padding: 0.5rem;
+    /* height: 30px; */
+    width: 200px;
+    font-size: 22px;
+    margin-left: -100px;
+    
+ }
+ .nav-menu ul li a{
+     text-decoration: none;
+    height: 30px;
+    width: 120px;
+    color: rgb(225, 59, 240);
+    font-size: 16px;
+}
+.nav-menu ul li a:hover{
+    background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    width: 200px;
+    color: white;
+    padding: 10px;
+}
+.nav-menu ul .active{
+    background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    /* width: 100px; */
+    text-align: center;
+    color: white;
+    /* padding: 10px; */
+}
+.nav-menu ul .active a{
+    /* background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    width: 100px; */
+    text-align: center;
+    color: white;
+    /* padding: 10px; */
+}
+
+.nav-menu .account{
+    display: flex;
+    float: right;
+    margin-right: 80px;
+    margin-top: -70px;
+}
+.nav-menu .account img{
+    margin-top: -20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.nav-menu .account span{
+    margin-left: 10px;
+}
+
+.nav-menu .account a{
+    margin-left: 12px;
+    text-decoration: none;
+}
+.nav-menu .account a:hover{
+    color: indianred;
+}
+.container{
+    display: flex;
+    /* margin-left: auto; */
+}
+.container .user-profile{
+    display: flex;
+    width: 30%;
+    float: left;
+    margin-top: 0px;
+    margin-left: -100px;
+    border-right: 1px solid gray;
+    /* background-color: gray; */
+}
+
+.container .user-profile img{
+    height: 100px;
+    width: 130px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.container .user-profile .info{
+    margin-left: -100px;
+    margin-top: 140px;
+}
+
+.container .user-profile .info ul{
+    margin-top: 30px;
+    padding: 10px;
+}
+.container .user-profile .info ul li{
+   padding: 10px;
+   list-style: none;
+   margin-left: -20px;
+}
+.container .user-profile .info ul li a{
+    color: black;
+    text-decoration: none;
+ }
+ .container .user-profile .info ul li a:hover{
+    background-color: cadetblue;
+    color: white;
+    width: 100%;
+    padding: 10px;
+ }
+ .content{
+     /* margin: auto; */
+     display: grid;
+     grid-template-columns: 15rem 15rem 15rem;
+     grid-row: auto;
+     grid-column-gap: 10px;
+     grid-row-gap: -15px;
+ }
+
+ .content .main-content{
+     padding: 3rem;
+     display: flex;
+     width: 100%;
+     /* background-color: gray; */
+     box-shadow: 3px #888888;
+     /* border: 1px solid gray; */
+ 
+ }
+ /* .content .main-content:hover{
+    transform: scale(1.1); 
+    background-color: gray;
+    border-radius: 10px;
+    padding-top: 7px;
+
+} */
+
+ .content .main-content .logo{
+     float: left;
+ }
+ .content .main-content .logo img{
+     width: 8rem;
+     height: 8rem;
+     border-radius: 1rem;
+ }
+ .content .main-content .description{
+     margin-left: 20px;
+     margin-top: -30px;
+ }
+ .content .main-content .description button{
+    background-color: green;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+.content .main-content .description .vote{
+    background-color: blue;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 3px;
+    cursor: pointer;
+    color: white;
+}
+.content .main-content .description span{
+    color: teal;
+    font-size: 18px;
+}
+.content .main-content .description button a{
+    color: white;
+    text-decoration: none;
+}
+.content .main-content .description .vote a{
+    color: white;
+    text-decoration: none;
+}
+.content .reset{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 25rem;
+    height: 18rem;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+.content .reset form{
+    position: relative;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.content .reset form input{
+    width: 20rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 18px;
+}
+.content .reset form button{
+   background:blue;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   text-align: center;
+   font-size: 18px;
+   width: 21rem;
+   height: 1.8rem;
+}
+
+.content .reset form .signup{
+    font-size: 18px; 
+    /* margin-left: 80px; */
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid white;
+    
+}
+.content .reset form .signup a{
+   
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    
+}
+.content .reset form .signup a:hover{
+    /* color: green; */
+    text-decoration: none;
+    font-size: 18px;
+    
+}
