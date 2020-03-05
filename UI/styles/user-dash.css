@@ -94,7 +94,7 @@ margin-top: 20px;
 }
 .container{
     display: flex;
-    margin-left: auto;
+    /* margin-left: auto; */
 }
 .container .user-profile{
     display: flex;
@@ -154,6 +154,14 @@ margin-top: 20px;
      /* border: 1px solid gray; */
  
  }
+ /* .content .main-content:hover{
+    transform: scale(1.1); 
+    background-color: gray;
+    border-radius: 10px;
+    padding-top: 7px;
+
+} */
+
  .content .main-content .logo{
      float: left;
  }
@@ -164,7 +172,24 @@ margin-top: 20px;
  }
  .content .main-content .description{
      margin-left: 20px;
+     margin-top: -30px;
  }
+ .content .main-content .description button{
+    background-color: green;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+.content .main-content .description span{
+    color: teal;
+    font-size: 18px;
+}
+.content .main-content .description button a{
+    color: white;
+    text-decoration: none;
+}
 footer{
     margin: 0px;
     width: 100vw;
