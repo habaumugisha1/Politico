@@ -182,11 +182,24 @@ margin-top: 20px;
     cursor: pointer;
     color: white;
 }
+.content .main-content .description .vote{
+    background-color: blue;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 3px;
+    cursor: pointer;
+    color: white;
+}
 .content .main-content .description span{
     color: teal;
     font-size: 18px;
 }
 .content .main-content .description button a{
+    color: white;
+    text-decoration: none;
+}
+.content .main-content .description .vote a{
     color: white;
     text-decoration: none;
 }
