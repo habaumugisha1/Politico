@@ -1,0 +1,200 @@
+.nav-menu{
+    /* margin: auto; */
+    width: 100vw;
+    margin-right: 30px;
+    height: 80px;
+    /* background: rgba(105, 122, 105, 0.3);   */
+    border-bottom: 1px solid gray;
+}
+@media screen and (max-width:425px){
+    .nav-menu{
+        height: 130px;
+    }
+}
+.logo{
+    height: 100px;
+    float: left;
+}
+
+.logo img {
+    height: 100px;
+    width: 130px;
+    margin-left: 20px;
+    margin-top: -15px;
+}
+
+.nav-menu ul {
+display: flex;
+padding: 1rem 0;
+list-style: none;
+justify-content: center;
+margin-top: 20px;
+
+}
+.nav-menu ul li{
+    padding: 0.5rem;
+    height: 30px;
+    width: 200px;
+    font-size: 22px;
+    
+ }
+ .nav-menu ul li a{
+     text-decoration: none;
+    height: 30px;
+    width: 120px;
+    color: rgb(225, 59, 240);
+    font-size: 16px;
+}
+.nav-menu ul li a:hover{
+    background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    width: 200px;
+    color: white;
+    padding: 10px;
+}
+.nav-menu ul .active{
+    background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    /* width: 100px; */
+    text-align: center;
+    color: white;
+    /* padding: 10px; */
+}
+.nav-menu ul .active a{
+    /* background-color: rgb(69, 69, 241);
+    border-radius: 5px;
+    width: 100px; */
+    text-align: center;
+    color: white;
+    /* padding: 10px; */
+}
+
+.nav-menu .account{
+    display: flex;
+    float: right;
+    margin-right: 80px;
+    margin-top: -70px;
+}
+.nav-menu .account img{
+    margin-top: -20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.nav-menu .account span{
+    margin-left: 10px;
+}
+
+.nav-menu .account a{
+    margin-left: 12px;
+    text-decoration: none;
+}
+.nav-menu .account a:hover{
+    color: indianred;
+}
+.container{
+    display: flex;
+    margin-left: auto;
+}
+.container .user-profile{
+    display: flex;
+    width: 30%;
+    float: left;
+    margin-top: 0px;
+    margin-left: -100px;
+    border-right: 1px solid gray;
+    /* background-color: gray; */
+}
+
+.container .user-profile img{
+    height: 100px;
+    width: 130px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.container .user-profile .info{
+    margin-left: -100px;
+    margin-top: 140px;
+}
+
+.container .user-profile .info ul{
+    margin-top: 30px;
+    padding: 10px;
+}
+.container .user-profile .info ul li{
+   padding: 10px;
+   list-style: none;
+   margin-left: -20px;
+}
+.container .user-profile .info ul li a{
+    color: black;
+    text-decoration: none;
+ }
+ .container .user-profile .info ul li a:hover{
+    background-color: cadetblue;
+    color: white;
+    width: 100%;
+    padding: 10px;
+ }
+ .content{
+     /* margin: auto; */
+     display: grid;
+     grid-template-columns: 15rem 15rem 15rem;
+     grid-row: auto;
+     grid-column-gap: 10px;
+     grid-row-gap: -15px;
+ }
+
+ .content .main-content{
+     padding: 3rem;
+     display: flex;
+     width: 100%;
+     /* background-color: gray; */
+     box-shadow: 3px #888888;
+     /* border: 1px solid gray; */
+ 
+ }
+ .content .main-content .logo{
+     float: left;
+ }
+ .content .main-content .logo img{
+     width: 8rem;
+     height: 8rem;
+     border-radius: 1rem;
+ }
+ .content .main-content .description{
+     margin-left: 20px;
+ }
+footer{
+    margin: 0px;
+    width: 100vw;
+    bottom: 0px;
+    height: 100px;
+    position: absolute;
+    /* margin-top: cal(100vh-60px); */
+    background: rgba(25, 26, 25, 0.7);
+}
+.footer-nav ul{
+    display: flex;
+    padding: 1rem 0;
+    list-style: none;
+    float: center;
+    justify-content: center;
+}
+
+.footer-nav ul li{
+    padding: 0 1rem;
+    height: 25px;
+    width: auto;
+}
+.footer-nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+.copy-right{
+    display: flex;
+    justify-content: center;
+    color: white;
+    /* padding-bottom: 10px; */
+    font-size: 20px;
+}
