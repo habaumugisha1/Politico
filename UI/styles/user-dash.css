@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .nav-menu{
     /* margin: auto; */
     width: 100vw;
@@ -32,8 +40,8 @@ margin-top: 20px;
 
 }
 .nav-menu ul li{
-    padding: 0.5rem;
-    height: 30px;
+    padding: 10px;
+    height: 40px;
     width: 200px;
     font-size: 22px;
     
@@ -41,14 +49,15 @@ margin-top: 20px;
  .nav-menu ul li a{
      text-decoration: none;
     height: 30px;
-    width: 120px;
+    /* width: 120px; */
+    padding:10px;
     color: rgb(225, 59, 240);
     font-size: 16px;
 }
 .nav-menu ul li a:hover{
     background-color: rgb(69, 69, 241);
     border-radius: 5px;
-    width: 200px;
+    /* width: 200px; */
     color: white;
     padding: 10px;
 }
@@ -73,10 +82,10 @@ margin-top: 20px;
     display: flex;
     float: right;
     margin-right: 80px;
-    margin-top: -70px;
+    margin-top: -50px;
 }
 .nav-menu .account img{
-    margin-top: -20px;
+    margin-top: -10px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -138,17 +147,19 @@ margin-top: 20px;
  }
  .content{
      /* margin: auto; */
+     /* background-color: gray; */
      display: grid;
-     grid-template-columns: 15rem 15rem 15rem;
+     grid-template-columns: 21rem 21rem 21rem;
      grid-row: auto;
-     grid-column-gap: 10px;
+     /* grid-column-gap: 10px; */
      grid-row-gap: -15px;
  }
 
  .content .main-content{
-     padding: 3rem;
+     padding: 2rem;
      display: flex;
      width: 100%;
+     margin-top: 20px;
      /* background-color: gray; */
      box-shadow: 3px #888888;
      /* border: 1px solid gray; */
@@ -179,6 +190,7 @@ margin-top: 20px;
     padding: 10px;
     border: none;
     border-radius: 6px;
+    margin-top: 10px;
     cursor: pointer;
     color: white;
 }
@@ -187,7 +199,9 @@ margin-top: 20px;
     padding: 10px;
     border: none;
     border-radius: 6px;
+    margin-top: 10px;
     margin-left: 3px;
+
     cursor: pointer;
     color: white;
 }
