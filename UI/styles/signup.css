@@ -24,11 +24,9 @@
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-@media screen and (max-width:425px) {
+@media screen and (max-width:625px) {
     .aside{
-        width: 90%;
-        margin-left: 5px;
-        margin-right: 5px;
+        display: none;
     }
     .aside p {
         font-size: 19px;
@@ -39,6 +37,18 @@
         margin-left: 60px;
     }
 }
+@media screen and (max-width:625px){
+    .container{
+        max-width: 100%;
+    }
+    .signup-form-group{
+        float: left;
+        margin-left: 10px;
+    }
+}
+
+
+
 .signup-form-group{
     background-color: rgba(167, 58, 152, 0.6);
     padding: 15px;
