@@ -216,6 +216,6 @@ footer{
     display: flex;
     justify-content: center;
     color: white;
-    /* padding-bottom: 10px; */
+    margin-top: 1.5rem;
     font-size: 20px;
 }

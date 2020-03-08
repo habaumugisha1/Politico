@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../styles/user-dash.css">
 </head>
 <body>
    <div class="wrapper">
-    <div class="nav-menu">
+    <div class="nav-menu" >
         <div class="logo">
-<img src="../images/lgo.png" alt="logo">
+         <a href="./index.html"><img src="../images/lgo.png" alt="logo"></a>
         </div>
-        <ul class="navs">
+        <ul class="navs" id="myNav">
             
-            <li class="active"><a href="" >parties</a></li>
-            <li><a href="./Offices.html">Offiecs</a></li>
+            <li class="link active"><a href="#" >parties</a></li>
+            <li><a href="#">Offieces</a></li>
+            <li><a href="#">Apply for candidate</a></li>
 
         </ul>
         <div class="account">
@@ -31,13 +33,13 @@
             </div>
            <div class="info">
                <ul>
-                   <li><a href="#">My Account</a></li>
-                   <li><a href="#">Setting</a></li>
-                   <li><a href="./reset-password.html">rest Password</a></li>
+                   <li><a href="./user-myaccount.html"><i class="fa fa-address-book-o" aria-hidden="true"></i> My Account</a></li>
+                   <li><a href="./reset-password.html"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                     rest Password</a></li>
                </ul>
            </div>
          </div>
-       <div class="content">
+       <div class="content active" data-index="0">
             <div class="main-content">
                 <div class="logo">
                    <img src="../images/logo.png" alt="">
@@ -75,21 +77,79 @@
                 </div>
             </div>
        </div>
-    </div>
 
-        <!-- <footer>
-                <nav class="footer-nav">
-                    <ul>
-                        <li><a href="#">Api</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Terms</a></li>
-                    </ul>
-                </nav>
-                <div class="copy-right">
-                    &copy;2020 Andela stack up program.
-                </div>
-        </footer> -->
+       <div class="content" data-index="1">
+        <div class="main-content">
+            <div class="description">
+                <h5>Type: federal</h5>
+                <h5>Name: <span>senate</span> </h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button> <button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>
+        <div class="main-content">
+            <!-- <div class="logo">
+               <img src="../images/user2.jpg" alt="">
+            </div> -->
+            <div class="description">
+                <h5>Type: local Government</h5>
+                <h5>Name:<span> Ministry of culture and sport</span></h5></h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button><button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>
+        <div class="main-content">
+            <!-- <div class="logo">
+               <img src="../images/user3.jpeg" alt="">
+            </div> -->
+            <div class="description">
+                <h5>Type: local Government</h5>
+                <h5>name: <span>Ministry of helth</span></h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button><button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="description">
+                <h5>Type: local Government</h5>
+                <h5>Name: <span>Ministry of education</span></h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button><button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="description">
+                <h5>Type: local Government</h5>
+                <h5>Name: <span>Ministry of defence</span></h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button><button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>
+        <div class="main-content">
+            
+            <div class="description">
+                <h5>Type: local Government</h5>
+                <h5>Name:<span> Ministry of Infrastructure</span></h5>
+                <button><a href="./user-dash-pol.html">view candidate</a></button><button class="vote"><a href="./voted.html">Results</a></button>
+            </div>
+        </div>  
+   </div>
+   <div class="content" data-index="2">
+
+    <div class="apply-form-group">
+        <form action="">
+            <div class="title">
+             Applying for candidate.
+            </div>
+
+         <input type="text" placeholder="Your names..."><br><br>
+         <input type="text" placeholder="Offiece..."><br><br>
+         <input type="text" placeholder="Party..."><br><br>
+         <button class="signup-btn">Apply</button>
+        </form>
+        <!-- <div class="sign-in">Have an account ? <a href="./login.html">Sign in</a></div> -->
+    </div>
+   </div>
+
+    </div>
    </div> 
+   <script src="../scripts/active.js"></script>
+   <script src="../scripts/respo.js"></script>
 </body>
 </html>
 
