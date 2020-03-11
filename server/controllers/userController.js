@@ -38,11 +38,14 @@ class Users{
                       };
                       
                       const usedEmail = myClient.query(isUserExist, [user.email]);
-                      console.log(usedEmail)
-                      if(usedEmail.rows > 0) {
-                          
-                      return res.status(400).json({status:400, message:`this Email ${user.email} is already in use`});
-                      };
+                      usedEmail.then((used) => {
+
+                          if(used.rows.length > 0) {
+                              
+                              console.log(used.rows[0])
+                          return res.status(400).json({status:400, message:`this Email ${user.email} is already in use`});
+                          };
+                      }).catch((err) => res.status(400).json({status:400, message:"bad request", errors:err}))
                       if(error) return res.status(400).json({status:400, message:"check me 0", errors:error});
                       const value = [user.firstName, user.otherName, user.lastName, user.passportUrl, user.email, user.password, user.isAdmin, user.userRole, user.createdOn];
                             return myClient.query(signUpUser, value).then(()=>{
