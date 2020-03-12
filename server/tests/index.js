@@ -88,18 +88,7 @@ describe('user tests', ()=> {
       done();
 
   });
-
-  it('user should not login with incorrect password', (done)=>{
-    chai.request(app)
-    .post('/api/v1/auth/login')
-    .send(testUser.incorrectPassword)
-    .end((err, res) => {
-      res.should.have.status(400);
-  })
-  done();
-
-
-})
+  
   it('user should login with correct data', (done)=>{
       chai.request(app)
       .post('/api/v1/auth/login')
