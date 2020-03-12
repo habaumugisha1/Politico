@@ -4,8 +4,8 @@ import validation from '../helper/valiMiddle'
  const router = express.Router();
 
  router.get('/home', Users.homePage);
- router.post('/auth/signUp', Users.signUp);
- router.post('/auth/login', Users.userLogIn)
+ router.post('/auth/signUp', validation.isValid(validation.schema.userSchema), Users.signUp);
+ router.post('/auth/login', validation.isValid(validation.schema.loginSchemema) , Users.userLogIn)
 
  export default router;
 

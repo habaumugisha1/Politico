@@ -24,80 +24,10 @@ describe('user tests', ()=> {
              .post('/api/v1/auth/signUp')
              .send(testUser.emptyData)
              .end((err,res) =>{
-                 res.should.have.status(500);
+                 res.should.have.status(403);
 
              });
              done()
-
     })
-    it('should not create user without data', (done) =>{
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send(testUser.emptyData)
-        .end((err, res) => {
-            res.should.have.status(500);
-            
-        })
-        done();
-    })
-
-    it('should not work if database have problem', (done) => {
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send("database problem")
-        .end((err, res) => {
-            res.should.have.status(500)
-        })
-        done();
-
-    });
-
-    it('should not create user with exist email', (done) =>{
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send(testUser.newuser)
-        .end((err, res) => {
-            res.should.have.status(500)
-        })
-        done();
-    });
-  it ('should not create new account if there is error in jwt', (done)=>{
-      chai.request(app)
-         .post('/api/v1/auth/signUp')
-         .send("error occured in creating token")
-         .end((err, res)=>{
-             res.should.have.status(500)
-         })
-         done();
-  })
-  it('should return error if there is error for inserting into database', (done) => {
-      chai.request(app)
-      .post('/api/v1/auth/signUp')
-      .end((err, res) =>{
-          res.should.have.status(500)
-      })
-      done();
-  });
-  it('user should not log with incorrect email', (done)=>{
-      chai.request(app)
-      .post('/api/v1/auth/login')
-      .send(testUser.loginData)
-      .end((err, res) => {
-          res.should.have.status(404);
-      })
-      done();
-
-  });
-  
-  it('user should login with correct data', (done)=>{
-      chai.request(app)
-      .post('/api/v1/auth/login')
-      .end((err, res) => {
-        res.should.have.status(200);
-    })
-    done();
-
-
-  })
 
 })

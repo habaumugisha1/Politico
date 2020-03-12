@@ -17,26 +17,24 @@ class Users{
 
  static signUp(req, res){
 
-    Joi.validate(req.body, userSchema, (error, callBack) =>{
-        if(error) return res.status(400).json({status:400, data1:error.details[0].message})
-        if(callBack){
+  
             pool.connect((err,myClient) =>{
                 if(err){
                     res.status(400).json({status:400, errors:err});
                 };
                 
-                bcrypt.hash(callBack.password, 10, (error, hashedPassword) =>{
-                    const user = {
-                        firstName: req.body.firstName,
-                        otherName: req.body.otherName,
-                        lastName: req.body.lastName,
-                        passportUrl:req.body.passportUrl,
-                        email: req.body.email,
-                        password: hashedPassword,
-                        isAdmin: req.body.isAdmin,
-                        userRole: req.body.userRole,
-                        createdOn: new Date()
-                      };
+                const user = {
+                    firstName: req.body.firstName,
+                    otherName: req.body.otherName,
+                    lastName: req.body.lastName,
+                    passportUrl:req.body.passportUrl,
+                    email: req.body.email,
+                    password: req.body.password,
+                    isAdmin: req.body.isAdmin,
+                    userRole: req.body.userRole,
+                    createdOn: new Date()
+                  };
+                bcrypt.hash(user.password, 10, (error, hashedPassword) =>{
                       
                       const usedEmail = myClient.query(isUserExist, [user.email]);
                       usedEmail.then((used) => {
@@ -48,7 +46,7 @@ class Users{
                           };
                       }).catch((err) => res.status(400).json({status:400, message:"bad request", errors:err}))
                       if(error) return res.status(400).json({status:400, message:"check me 0", errors:error});
-                      const value = [user.firstName, user.otherName, user.lastName, user.passportUrl, user.email, user.password, user.isAdmin, user.userRole, user.createdOn];
+                      const value = [user.firstName, user.otherName, user.lastName, user.passportUrl, user.email, hashedPassword, user.isAdmin, user.userRole, user.createdOn];
                             return myClient.query(signUpUser, value).then(()=>{
                                     jwt.sign({
                                        email: user.email,
@@ -64,9 +62,7 @@ class Users{
                                     )
             })
         })
-     }
-    })
-// });
+    
 };
 
 static userLogIn (req,res){
@@ -74,9 +70,7 @@ static userLogIn (req,res){
         email: req.body.email,
         password: req.body.password
     };
-    if(req.body.email =="") {return res.status(400).json({status:400, message:"email can not be empty"})}
-    if(req.body.password =="") {return res.status(400).json({status:400, message:"password can not be empty"})}
-
+    
         pool.connect((errors, client) => {
             if(errors) {res.status(400).json({status:400, err:errors})}
             client.query(isUserExist, [data.email]).then((user) => { 
