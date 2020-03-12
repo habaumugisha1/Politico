@@ -1,11 +1,12 @@
 import Joi from '@hapi/joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
-import userSchema from '../helper/validation'
+import {userSchema, userLoginSchema } from '../helper/validation'
+import isValid from '../helper/valiMiddle'
 import imageUrl from '../helper/image'
 
 import { pool } from '../models/db';
-import {signUpUser, signIn, isUserExist} from '../models/query'
+import {signUpUser, isUserExist} from '../models/query'
 
 
 class Users{
@@ -67,6 +68,44 @@ class Users{
     })
 // });
 };
+
+static userLogIn (req,res){
+    const data ={
+        email: req.body.email,
+        password: req.body.password
+    };
+    if(req.body.email =="") {return res.status(400).json({status:400, message:"email can not be empty"})}
+    if(req.body.password =="") {return res.status(400).json({status:400, message:"password can not be empty"})}
+
+        pool.connect((errors, client) => {
+            if(errors) {res.status(400).json({status:400, err:errors})}
+            client.query(isUserExist, [data.email]).then((user) => { 
+                console.log(data.password)
+                
+                      bcrypt.compare(data.password, user.rows[0].password, (errors, data) =>{
+                          if(errors){ return res.status(400).json({status:400, message:errors})}
+                          if(!data)  {
+                            console.log(user.rows[0].password)
+                            console.log(data)
+                            return res.status(400).json({ status: 400, messsage: 'invalid creadetial'});
+                        }
+                        jwt.sign({
+                            email: user.rows[0].email,
+                            firstName: user.rows[0].firstName,
+                            lastName: user.rows[0].lastName,
+                            isAdmin:user.rows[0].isAdmin,
+                            userRole:user.rows[0].userRole
+                         }, 'SECRETEKEY', (er, token)=>{
+                             if(er) return res.status(400).json({status:400, message:er})
+                             res.status(200).json({status:200,message:'Logined successful', Data:token})
+                         })
+                    })
+                // }
+
+            }).catch((err) => res.status(404).json({status:404, message:"You don't have account here", data:err}))
+        })
+    // }
+}
 
 }
 

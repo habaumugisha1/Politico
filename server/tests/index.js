@@ -22,9 +22,9 @@ describe('user tests', ()=> {
     it('user should not create new account without email', (done) =>{
         chai.request(app)
              .post('/api/v1/auth/signUp')
-             .send(testUser.newuser)
+             .send(testUser.emptyData)
              .end((err,res) =>{
-                 res.should.have.status(400);
+                 res.should.have.status(500);
 
              });
              done()
@@ -35,8 +35,8 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/signUp')
         .send(testUser.emptyData)
         .end((err, res) => {
-            res.should.have.status(400);
-            res.should.be.json
+            res.should.have.status(500);
+            
         })
         done();
     })
@@ -46,7 +46,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/signUp')
         .send("database problem")
         .end((err, res) => {
-            res.should.have.status(400)
+            res.should.have.status(500)
         })
         done();
 
@@ -57,7 +57,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/signUp')
         .send(testUser.newuser)
         .end((err, res) => {
-            res.should.have.status(400)
+            res.should.have.status(500)
         })
         done();
     });
@@ -66,7 +66,7 @@ describe('user tests', ()=> {
          .post('/api/v1/auth/signUp')
          .send("error occured in creating token")
          .end((err, res)=>{
-             res.should.have.status(400)
+             res.should.have.status(500)
          })
          done();
   })
@@ -74,9 +74,41 @@ describe('user tests', ()=> {
       chai.request(app)
       .post('/api/v1/auth/signUp')
       .end((err, res) =>{
-          res.should.have.status(400)
+          res.should.have.status(500)
       })
       done();
+  });
+  it('user should not log with incorrect email', (done)=>{
+      chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(testUser.loginData)
+      .end((err, res) => {
+          res.should.have.status(404);
+      })
+      done();
+
+  });
+
+  it('user should not login with incorrect password', (done)=>{
+    chai.request(app)
+    .post('/api/v1/auth/login')
+    .send(testUser.incorrectPassword)
+    .end((err, res) => {
+      res.should.have.status(400);
+  })
+  done();
+
+
+})
+  it('user should login with correct data', (done)=>{
+      chai.request(app)
+      .post('/api/v1/auth/login')
+      .end((err, res) => {
+        res.should.have.status(200);
+    })
+    done();
+
+
   })
 
 })

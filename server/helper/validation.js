@@ -1,4 +1,4 @@
-import Joi from '@hapi/joi';
+import Joi from 'joi';
 
 const userSchema = Joi.object().keys({
     firstName : Joi.string().min(4).max(20).required(),
@@ -12,4 +12,10 @@ const userSchema = Joi.object().keys({
     userRole: Joi.string().required()
 
 });
-export default userSchema;
+
+const userLoginSchema = Joi.object().keys({
+    email:Joi.string().email().required(),
+    password:Joi.string().required()
+})
+
+export default {userSchema, userLoginSchema};

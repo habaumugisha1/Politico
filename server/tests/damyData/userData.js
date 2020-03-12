@@ -7,6 +7,19 @@ const users = {
       isAdmin: 'false',
       userRole: 'user',
     },
-    emptyData:{}
+    emptyData:{},
+    loginData:{
+      email:"habajeun@gmail.com",
+      password: "qwertyuiop"
+    },
+    incorrectPassword:{
+      email:"habajeunes2@gmail.com",
+      password: "qwerty"
+    },
+    correctData:{
+      email:"habajeunes2@gmail.com",
+      password: "qwertyuiop"
+    }
   };
+
   export default users;
