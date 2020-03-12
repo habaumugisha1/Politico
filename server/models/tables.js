@@ -90,4 +90,4 @@ pool.on('remove', () => {
 //   dropTables();
 
   
-// require('make-runnable');
+require('make-runnable');
