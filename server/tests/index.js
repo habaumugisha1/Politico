@@ -22,7 +22,7 @@ describe('user tests', ()=> {
     it('user should not create new account without email', (done) =>{
         chai.request(app)
              .post('/api/v1/auth/signUp')
-             .send(testUser.emptyData)
+            //  .send(testUser.emptyData)
              .end((err,res) =>{
                  res.should.have.status(403);
 
