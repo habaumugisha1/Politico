@@ -92,7 +92,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/login')
         .send(loginNoEmail)
         .end((err, res) =>{
-           res.should.have.status(403); 
+           res.should.have.status(400); 
         });
         done();
     });
