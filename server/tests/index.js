@@ -87,12 +87,12 @@ describe('user tests', ()=> {
     //     done();
     // });
 
-    it('user should  not login without email or password', (done)=>{
+    it('user should  not login with email or password', (done)=>{
         chai.request(app)
         .post('/api/v1/auth/login')
         .send(loginNoEmail)
         .end((err, res) =>{
-           res.should.have.status(400); 
+           res.should.have.status(201); 
         });
         done();
     });
