@@ -98,14 +98,14 @@ describe('user tests', ()=> {
     //     done();
     // });
 
-    it('user should  login with email and password', (done)=>{
-        chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(login)
-        .end((err, res) =>{
-           res.should.have.status(200); 
-        });
-        done();
-    });
+    // it('user should  login with email and password', (done)=>{
+    //     chai.request(app)
+    //     .post('/api/v1/auth/login')
+    //     .send(login)
+    //     .end((err, res) =>{
+    //        res.should.have.status(200); 
+    //     });
+    //     done();
+    // });
 
 })
