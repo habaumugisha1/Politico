@@ -38,7 +38,7 @@ class Users{
                       const usedEmail = myClient.query(isUserExist, [user.email]);
                       usedEmail.then((used) => {
                                  
-                          if(used.rows[0].length > 0) {
+                          if(used.rows.length > 0) {
                               
                               console.log(used.rows[0])
                           return res.status(400).json({status:400, message:`this Email ${user.email} is already in use`});
@@ -55,7 +55,7 @@ class Users{
                                        lastName: user.lastName,
                                      }, 'SECRETEKEY', (error,token)=>{
                                          if (error) return res.status(400).json({ status: 403, message:'check me 3', err: error });
-                                         return res.status(201).json({status:201, message:'Your account succful created!', data: token})
+                                         return res.status(201).json({status:201, message:'Your account succful created!', data: token, userData:user})
                                      })
                                     }).catch((err) => res.status(400).json({status:400, message:'check me 4', errors:err}) 
                                     )
@@ -100,7 +100,7 @@ static userLogIn (req,res){
                     })
                 // }
 
-            }).catch((err) => res.status(404).json({status:404, message:"You don't have account here", data:err}))
+            }).catch((err) => res.status(400).json({status:400, message:"You don't have account here", data:err}))
         })
     // }
 }

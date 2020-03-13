@@ -22,7 +22,7 @@ class Authorize {
                         if (err) return res.status(400).json({status:err, erros:err});
                        return value.query(`SELECT * FROM users WHERE email=$1;`, [dataAdmin.email]).then((user) => {
                             if(user.rows[0].userrole==='Admin') return next();
-                           if(user.rows[0].userrole !=='Admin') return res.status(403).json({status:403, message:"Only admin is allowed"})
+                           if(user.rows[0].userrole !=='Admin') return res.status(400).json({status:400, message:"Only admin is allowed"})
                         }).catch((errors) => res.status(400).json({status:400, error:errors}))
             
                     })

@@ -53,7 +53,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/signUp')
         .send(userData)
         .end((err, res) =>{
-           res.should.have.status(403); 
+           res.should.have.status(400); 
         });
         done();
 
@@ -63,7 +63,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/signUp')
         .send(userNoEmail)
         .end((err, res) =>{
-           res.should.have.status(403); 
+           res.should.have.status(400); 
         });
         done(); 
     });
@@ -77,17 +77,8 @@ describe('user tests', ()=> {
         done(); 
     });
 
-    // it('user should  not login without data', (done)=>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/login')
-    //     .send(userData)
-    //     .end((err, res) =>{
-    //        res.should.have.status(403); 
-    //     });
-    //     done();
-    // });
 
-    it('user should  not login with email or password', (done)=>{
+    it('user should  not login without email or password', (done)=>{
         chai.request(app)
         .post('/api/v1/auth/login')
         .send(loginNoEmail)
@@ -102,7 +93,7 @@ describe('user tests', ()=> {
         .post('/api/v1/auth/login')
         .send(incorrectEmail)
         .end((err, res) =>{
-           res.should.have.status(404); 
+           res.should.have.status(400); 
         });
         done();
     });
