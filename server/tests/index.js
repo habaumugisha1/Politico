@@ -78,34 +78,4 @@ describe('user tests', ()=> {
     });
 
 
-    // it('user should  not login without email or password', (done)=>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/login')
-    //     .send(loginNoEmail)
-    //     .end((err, res) =>{
-    //        res.should.have.status(400); 
-    //     });
-    //     done();
-    // });
-
-    // it('user should  not login with incorretct email', (done)=>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/login')
-    //     .send(incorrectEmail)
-    //     .end((err, res) =>{
-    //        res.should.have.status(400); 
-    //     });
-    //     done();
-    // });
-
-    // it('user should  login with email and password', (done)=>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/login')
-    //     .send(login)
-    //     .end((err, res) =>{
-    //        res.should.have.status(200); 
-    //     });
-    //     done();
-    // });
-
 })

@@ -11,9 +11,9 @@ class Authorize {
 
         jwt.verify(token, 'SECRETEKEY', (err, dataAdmin) => {
             
-            if (err) return res.status(401).json({ status: 401, message: error });
+            if (err) return res.status(401).json({ status: 401, message: err });
             authUser=dataAdmin
-            console.log(dataAdmin);
+            
             
             req.authUser = authUser;
             // return next();

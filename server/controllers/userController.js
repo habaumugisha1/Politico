@@ -39,8 +39,6 @@ class Users{
                       usedEmail.then((used) => {
                                  
                           if(used.rows.length > 0) {
-                              
-                              console.log(used.rows[0])
                           return res.status(400).json({status:400, message:`this Email ${user.email} is already in use`});
                           };
                       }).catch((err) => res.status(400).json({status:400, message:"bad request", errors:err}))
@@ -73,13 +71,6 @@ static userLogIn (req,res){
         pool.connect((errors, client) => {
             if(errors) return res.status(400).json({status:400, err:errors})
            return client.query(isUserExist, [data.email]).then((user) => { 
-                // if(user) {
-                //     console.log(user.rows);
-                //     console.log(user.rows[0].userrole);
-                // }
-            //    console.log(user.rows[0].email)
-            //     console.log(user.rows[0].password)
-            //     console.log(user.rows[0].firstName)
 
                       bcrypt.compare(data.password, user.rows[0].password, (errors, data) =>{
                           if(errors){ return res.status(400).json({status:400, message:errors})}
@@ -87,15 +78,16 @@ static userLogIn (req,res){
                             
                             return res.status(400).json({ status: 400, messsage: 'invalid creadetial'});
                         }
-                        jwt.sign({
+                        const logedInUserData = {
                             email: user.rows[0].email,
                             firstName: user.rows[0].firstname,
                             lastName: user.rows[0].lastname,
                             isAdmin:user.rows[0].isadmin,
                             userRole:user.rows[0].userrole
-                         }, 'SECRETEKEY', (er, token)=>{
+                         };
+                        jwt.sign(logedInUserData, 'SECRETEKEY', (er, token)=>{
                              if(er) return res.status(400).json({status:400, message:er})
-                            return res.status(200).json({status:200,message:'Logined successful', Data:token})
+                            return res.status(200).json({status:200,message:'Logined successful', Data:token, userData:logedInUserData})
                          })
                     })
                 // }
