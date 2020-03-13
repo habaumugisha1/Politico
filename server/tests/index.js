@@ -88,15 +88,15 @@ describe('user tests', ()=> {
     //     done();
     // });
 
-    it('user should  not login with incorretct email', (done)=>{
-        chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(incorrectEmail)
-        .end((err, res) =>{
-           res.should.have.status(400); 
-        });
-        done();
-    });
+    // it('user should  not login with incorretct email', (done)=>{
+    //     chai.request(app)
+    //     .post('/api/v1/auth/login')
+    //     .send(incorrectEmail)
+    //     .end((err, res) =>{
+    //        res.should.have.status(400); 
+    //     });
+    //     done();
+    // });
 
     it('user should  login with email and password', (done)=>{
         chai.request(app)
