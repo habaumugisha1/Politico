@@ -77,15 +77,15 @@ describe('user tests', ()=> {
         done(); 
     });
 
-    it('user should  not login without data', (done)=>{
-        chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(userData)
-        .end((err, res) =>{
-           res.should.have.status(403); 
-        });
-        done();
-    });
+    // it('user should  not login without data', (done)=>{
+    //     chai.request(app)
+    //     .post('/api/v1/auth/login')
+    //     .send(userData)
+    //     .end((err, res) =>{
+    //        res.should.have.status(403); 
+    //     });
+    //     done();
+    // });
 
     it('user should  not login without email or password', (done)=>{
         chai.request(app)
