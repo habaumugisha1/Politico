@@ -49,6 +49,9 @@
     "pg": "^7.18.2",
     "postgresql": "0.0.1"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "browserslist": [
     "defaults",
     "not IE 11",

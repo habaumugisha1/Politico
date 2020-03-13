@@ -19,13 +19,18 @@ export default {
             isAdmin: Joi.string().required(),
             userRole: Joi.string().required()
         
+        }),
+        partySchema : Joi.object().keys({
+           name:Joi.string().required(),
+           hdAdress:Joi.string().required(),
+           logoUrl:Joi.string().required()
         })
    
      },
      isValid: (schema) => {
      return (req, res, next) => {
           Joi.validate( req.body, schema, (err, result) => {
-             if(err) res.status(403).json({status:403, error: err.details[0].message});
+             if(err) return res.status(400).json({status:400, error: err.details[0].message});
            if(result){
               return next();
            }
