@@ -103,11 +103,10 @@ describe('user tests', ()=> {
     it('user should view all parties', (done) =>{
         chai.request(app)
         .get('/api/v1/parties')
-        .end((err, res) =>{
-           res.should.have.status(200); 
-           res.should.be.json;
-           res.body.should.be.a('object')
-        });
+        .then((res) => {
+            res.should.have.status(200);
+            done();
+          }).catch(error => console.error(error));
         done(); 
     });
    
