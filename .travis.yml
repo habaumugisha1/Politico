@@ -17,3 +17,6 @@ services:
 before_script:
   - psql -c 'create database politico;' -U postgres
 
+cache:
+  directories:
+    - 'node_modules'
