@@ -99,17 +99,7 @@ describe('user tests', ()=> {
         done(); 
     });
 
-    it('user should not view all parties when there are errors', (done) =>{
-        chai.request(app)
-        .get('/api/v1/parties')
-        .end((err, res) =>{
-           res.should.have.status(400); 
-           res.should.be.json;
-           res.body.should.be.a('object')
-        });
-        done(); 
-    });
-    
+
     it('user should view all parties', (done) =>{
         chai.request(app)
         .get('/api/v1/parties')
