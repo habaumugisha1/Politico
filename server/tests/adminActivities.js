@@ -7,6 +7,10 @@ chai.should();
 
 chai.use(chaiHttp);
 let userToken;
+const newOffice = {
+    type: "local government",
+    name:"Minisante"
+}
 const newParty ={
     name: "inkingi",
     hdAdress:"kigali/rwanda",
@@ -49,6 +53,28 @@ describe('Admin activities', () => {
             });
             done();
 
-        })
+        });
+        it(' should not register a office if you are not admin', (done) => {
+            chai.request(app)
+            .post('/api/v1/parties')
+            .set('Athorization', `bearer ${global.AuthUser}`)
+            .send(newOffice)
+            .end((err, res) => {
+                res.should.have.status(401);
+            });
+            done();
+
+        });
+        it(' should not register a office without token', (done) => {
+            chai.request(app)
+            .post('/api/v1/parties')
+            .set('Athorization', `bearer ${global.AuthUser}`)
+            .send(newParty)
+            .end((err, res) => {
+                res.should.have.status(401);
+            });
+            done();
+
+        });
     })
 })

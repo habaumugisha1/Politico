@@ -5,8 +5,7 @@ import myParty from '../models/query'
 
 class Admin{
     static createParty(req, res){
-        const newParty = {
-            
+        const newParty = { 
             name: req.body.name,
             hdAdress:req.body.hdAdress,
             logoUrl:req.body.logoUrl,
@@ -50,6 +49,31 @@ class Admin{
                     }
         }
        })
+    };
+
+    static createNewOffice (req, res){
+        const newOffice = { 
+            name: req.body.name,
+            type:req.body.type,
+            createdOn: new Date()
+        };
+        pool.connect(async(errors, myPool) => {
+            if(errors) return res.status(400).json({status:400, err:errors});
+
+            const isOfficeExist = myPool.query('SELECT * FROM offices WHERE name=$1', [newOffice.name]);
+             isOfficeExist.then(async(myOffice) => {
+
+                 if(myOffice.rows.length > 0) return res.status(400).json({status:400, message:`Office ${newOffice.name} is already registed`});
+     
+                 const office = await myPool.query('INSERT INTO offices(type, name, createdOn) VALUES($1,$2,$3)', [newOffice.type, newOffice.name, newOffice.createdOn]);
+     
+                 if (office.error) return res.status(400).json({status:400, message:'something went wrong', err:error});
+                 return res.status(201).json({status:201, message:'New Office is created successful', data:newOffice});
+
+             }).catch((err) =>res.status(400).json({status:400, message:'something went wrong', err:error}))
+        })
+
+
     }
 }
 export default Admin;
