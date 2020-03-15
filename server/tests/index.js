@@ -10,6 +10,28 @@ chai.use(chaiHttp);
 
 describe('user tests', ()=> {
     const userData = {};
+   const parties = [
+    {
+        "id": 1,
+        "name": "flag",
+        "logourl": "image"
+    },
+    {
+        "id": 2,
+        "name": "FPR",
+        "logourl": "UI/images/user.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "FPR",
+        "logourl": "UI/images/user.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "FPR",
+        "logourl": "UI/images/user.jpeg"
+    }
+];
    const loginNoEmail = {password:'qwertyuiop'}
    const incorrectEmail= {
     email:'habaj@gmail.com',
@@ -77,5 +99,16 @@ describe('user tests', ()=> {
         done(); 
     });
 
+
+    it('user should view all parties', (done) =>{
+        chai.request(app)
+        .get('/api/v1/parties')
+        .then((res) => {
+            res.should.have.status(200);
+            done();
+          }).catch(error => console.error(error));
+        done(); 
+    });
+   
 
 })

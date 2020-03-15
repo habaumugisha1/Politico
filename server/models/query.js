@@ -10,6 +10,9 @@ INSERT INTO party(name, hdAdress, logoUrl, createdOn) VALUES($1,$2,$3,$4) RETURN
 export const isUserExist = `
 SELECT * FROM users WHERE email=$1;
 `;
+export const getAllParties = `
+SELECT id, name, logourl FROM party ORDER BY id ASC;
+`;
 
 export const isPartyExist = `
 SELECT * FROM party WHERE name=$1;

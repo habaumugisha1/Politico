@@ -3,8 +3,26 @@ language: node_js
 node_js:
   - "stable"
 
+install:
+  - npm install
+  - npm ci
+
 script: 
   - npm test
+  ./scripts/run-tests.sh
 after_success: npm run coverage
 
+notifications:
+  email: false
+services:
+  - postgresql
 
+deploy:
+  skip_cleanup: true
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+cache:
+  directories:
+    - 'node_modules'

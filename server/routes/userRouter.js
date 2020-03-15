@@ -12,6 +12,8 @@ import validation from '../helper/valiMiddle'
 //  Admin activities
 router.post('/parties', Authorize.isAdmin , validation.isValid(validation.schema.partySchema), Admin.createParty)
 
+// get parties
+router.get('/parties', Users.getParties);
  export default router;
 
  //validation.isValid(validation.schema),

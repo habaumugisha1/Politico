@@ -5,7 +5,7 @@ import isValid from '../helper/valiMiddle'
 import imageUrl from '../helper/image'
 
 import { pool } from '../models/db';
-import {signUpUser, isUserExist} from '../models/query'
+import {signUpUser, isUserExist, getAllParties} from '../models/query'
 
 
 class Users{
@@ -95,6 +95,15 @@ static userLogIn (req,res){
             }).catch((err) => res.status(400).json({status:400, message:"You don't have account here", data:err}))
         })
     // }
+};
+
+static getParties(req, res){
+    pool.connect( async(error, client) => {
+        if(error) return res.status(400).json({status:400, err:error});
+        const parties = await client.query(getAllParties); 
+
+        return res.status(200).json({status:200, data:parties.rows})
+    })
 }
 
 }
