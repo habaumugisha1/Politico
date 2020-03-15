@@ -28,6 +28,28 @@ class Admin{
 
         })
 
+    };
+
+    static deleteParty(req, res){
+        
+       pool.connect( async (error, myDb) => {
+           
+           if(error) return res.status(400).json({status:400, err:error});
+
+           const findParty = await myDb.query('SELECT * FROM party WHERE id=$1', [req.params.id]);
+           if (findParty.rows.length === 0) return res.status(404).json({status:404, message:'Party you are trying to delete is not found!'});
+            if(findParty){
+             try {
+
+                   await myDb.query('DELETE FROM party WHERE id=$1', [req.params.id]);
+                  
+                  return res.status(200).json({status:200, message:'Party deleted successful!'})
+              }
+                 catch (err){
+                       return res.status(400).json({status:400, message:'error occured',errors:err})
+                    }
+        }
+       })
     }
 }
 export default Admin;

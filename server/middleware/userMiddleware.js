@@ -4,14 +4,14 @@ import  isUserExist from '../models/query'
 class Authorize {
     static isAdmin(req,res,next){
         const bearer = req.headers.authorization;
-        if(!bearer) return res.status(403).json({status:403, message:"you are not Authorized"});
+        if(!bearer) return res.status(401).json({status:401, message:"you are not Authorized"});
         // console.log(bearer)
         const token = req.headers.authorization.split(' ')[1];
         let authUser;
 
         jwt.verify(token, 'SECRETEKEY', (err, dataAdmin) => {
             
-            if (err) return res.status(401).json({ status: 401, message: err });
+            if (err) return res.status(400).json({ status: 400, message: err });
             authUser=dataAdmin
             
             
