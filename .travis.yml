@@ -18,7 +18,8 @@ services:
   - postgresql
 
 deploy:
-  skip_cleanup: true
+  provider: script
+  script: deploy.sh
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
