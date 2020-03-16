@@ -109,20 +109,20 @@ describe('user tests', ()=> {
     //     });
     //     done(); 
     // });
-    it('should not get a single party when id is not exist', (done) =>{
+    it('should not get a single party when id is invalid', (done) =>{
         chai.request(app)
         .get('/api/v1/parties/30')
         .end((err, res) =>{
-           res.should.have.status(404); 
+           res.should.have.status(400); 
         });
         done(); 
     });
 
-    it('should get a single party when id is invalid', (done) =>{
+    it('should get a single party when id is not exist', (done) =>{
         chai.request(app)
         .get('/api/v1/parties/kk')
         .end((err, res) =>{
-           res.should.have.status(400); 
+           res.should.have.status(404); 
         });
         done(); 
     });
