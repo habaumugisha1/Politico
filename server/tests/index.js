@@ -99,16 +99,6 @@ describe('user tests', ()=> {
         done(); 
     });
 
-
-    it('should get a single party when id is not number', (done) =>{
-        chai.request(app)
-        .get('/api/v1/parties/kk')
-        .end((err, res) =>{
-           res.should.have.status(400); 
-        });
-        done(); 
-    });
-
    
 
 })
