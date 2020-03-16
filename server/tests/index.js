@@ -118,11 +118,11 @@ describe('user tests', ()=> {
         done(); 
     });
 
-    it('should get a single party when id is valid', (done) =>{
+    it('should get a single party when id is invalid', (done) =>{
         chai.request(app)
-        .get('/api/v1/parties/2')
+        .get('/api/v1/parties/kk')
         .end((err, res) =>{
-           res.should.have.status(200); 
+           res.should.have.status(400); 
         });
         done(); 
     });
