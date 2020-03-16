@@ -1,6 +1,6 @@
 import { pool } from '../models/db';
 import isPartyExist from '../models/query'
-import Office from '../helper/newObjects'
+// import Office from '../helper/newObjects'
 import myParty from '../models/query'
 
 
