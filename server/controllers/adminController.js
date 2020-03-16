@@ -1,12 +1,12 @@
 import { pool } from '../models/db';
 import isPartyExist from '../models/query'
+// import Office from '../helper/newObjects'
 import myParty from '../models/query'
 
 
 class Admin{
     static createParty(req, res){
-        const newParty = {
-            
+        const newParty = { 
             name: req.body.name,
             hdAdress:req.body.hdAdress,
             logoUrl:req.body.logoUrl,
@@ -50,6 +50,38 @@ class Admin{
                     }
         }
        })
+    };
+
+    static createNewOffice (req, res){
+        
+        const myData = {
+            type:req.body.type,
+            name: req.body.name,
+            createdOn: new Date()
+        }
+        
+
+        pool.connect(async(errors, myPool) => {
+            if(errors) return res.status(400).json({status:400, err:errors});
+                
+
+            const isOfficeExist = myPool.query('SELECT * FROM offices WHERE name=$1', [myData.name]);
+             isOfficeExist.then(async(myOffice) => {
+
+                 if(myOffice.rows.length > 0) {
+                     return res.status(400).json({status:400, message:`Office ${myData.name} is already registed`});
+                 }
+                 const offices = await myPool.query('INSERT INTO offices(type, name, createdOn) VALUES($1,$2,$3) RETURNING *', [myData.type,myData.name,myData.createdOn]);
+                
+                  console.log(offices)
+     
+                 if (offices.error) return res.status(400).json({status:400, message:'something went wrong', err:error});
+                 return res.status(201).json({status:201, message:'New Office is created successful', data:myData});
+
+             }).catch((error) =>res.status(400).json({status:400, message:'something went wrong', err:error}))
+        })
+
+
     }
 }
 export default Admin;

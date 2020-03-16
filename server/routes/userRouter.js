@@ -10,7 +10,9 @@ import validation from '../helper/valiMiddle'
  router.post('/auth/login', validation.isValid(validation.schema.loginSchemema) , Users.userLogIn)
 
 //  Admin activities
-router.post('/parties', Authorize.isAdmin , validation.isValid(validation.schema.partySchema), Admin.createParty)
+router.post('/parties', Authorize.isAdmin , validation.isValid(validation.schema.partySchema), Admin.createParty);
+router.post('/offices',Authorize.isAdmin,  validation.isValid(validation.schema.officeSchema), Admin.createNewOffice)
+
 
 // get parties
 router.get('/parties', Users.getParties);

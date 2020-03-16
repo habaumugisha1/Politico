@@ -24,6 +24,11 @@ export default {
            name:Joi.string().required(),
            hdAdress:Joi.string().required(),
            logoUrl:Joi.string().required()
+        }),
+
+        officeSchema : Joi.object().keys({
+           type: Joi.string().trim().required(),
+           name:Joi.string().trim().required()
         })
    
      },
