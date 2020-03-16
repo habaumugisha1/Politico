@@ -16,6 +16,7 @@ router.post('/offices',Authorize.isAdmin,  validation.isValid(validation.schema.
 
 // get parties
 router.get('/parties', Users.getParties);
+router.get('/parties/:partyId', Users.getSingleParty);
 router.delete('/parties/:id', Authorize.isAdmin, Admin.deleteParty);
 
  export default router;

@@ -106,6 +106,19 @@ static getParties(req, res){
     })
 }
 
+static getSingleParty(req, res){
+    pool.connect(async (err, myClient) =>{
+        if(err) return res.status(400).json({status:400, erro:err});
+        // looking if party is exists'
+        const singlePartyId = parseInt(req.params.partyId, 10);
+        if (!Number.isInteger(singlePartyId)) return res.status(400).json({status:400, message: 'Please Id should be number'})
+        const isParty = await myClient.query(`SELECT * FROM party WHERE id=$1;`, [singlePartyId]);
+        
+            if(isParty.rows.length === 0) return res.status(404).json({status:404,message:`Party with id of ${singlePartyId} is not found`});
+            return res.status(200).json({status:200, data:isParty.rows});
+    })
+}
+
 }
 
 export default Users;

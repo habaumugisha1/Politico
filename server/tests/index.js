@@ -98,6 +98,32 @@ describe('user tests', ()=> {
         });
         done(); 
     });
+    it('should get a single party when id is valid', (done) =>{
+        chai.request(app)
+        .get('/api/v1/parties/2')
+        .end((err, res) =>{
+           res.should.have.status(200); 
+        });
+        done(); 
+    });
+
+    it('should not get a single party when id is not number', (done) =>{
+        chai.request(app)
+        .get('/api/v1/parties/hjk')
+        .end((err, res) =>{
+           res.should.have.status(400); 
+        });
+        done(); 
+    });
+    it('should not get a single party when id is not exist', (done) =>{
+        chai.request(app)
+        .get('/api/v1/parties/30')
+        .end((err, res) =>{
+           res.should.have.status(404); 
+        });
+        done(); 
+    });
+
    
 
 })
