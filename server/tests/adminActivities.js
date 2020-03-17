@@ -156,6 +156,16 @@ describe('Admin activities', () => {
             done()
         });
 
+        it('should not edit party when is empty field', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${adminToken}`)
+            .send(incompleteParty)
+            .end((err,res) =>{
+                res.should.have.status(400)
+            })
+            done()
+        });
+
         it('should not edit party when is not found in database', (done) => {
             chai.request(app).patch('/api/v1/parties/7')
             .set('Authorization', `bearer ${adminToken}`)
@@ -166,15 +176,7 @@ describe('Admin activities', () => {
             done()
         });
 
-        it('should not edit party when is empty field', (done) => {
-            chai.request(app).patch('/api/v1/parties/1')
-            .set('Authorization', `bearer ${adminToken}`)
-            .send(incompleteParty)
-            .end((err,res) =>{
-                res.should.have.status(400)
-            })
-            done()
-        });
+        
 
         it('should edit party when all data is correct', (done) => {
             chai.request(app).patch('/api/v1/parties/1')
