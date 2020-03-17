@@ -18,6 +18,11 @@ const newParty ={
     logoUrl:"../UI/images/user.jpeg"
 }
 
+const incompleteParty ={
+    hdAdress:"kigali/rwanda",
+    logoUrl:"../UI/images/user.jpeg"
+}
+
 describe('Admin activities', () => {
     before((done) => {
         chai.request(app)
@@ -31,11 +36,13 @@ describe('Admin activities', () => {
     });
 
     describe('create party', () => {
+        const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
+        const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZXMyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImhhYnVtdWdpc2hhIiwibGFzdE5hbWUiOiJhbWkgZGVzIGpldW5lcyIsImlzQWRtaW4iOnRydWUsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODQ0MzcwNDF9.cDvBpJ2yciz_qi6MazcXdSG8zRgC24PUzvuCy8upnxs";
         
         it(' should not create a new party if is not admin', (done) => {
             chai.request(app)
             .post('/api/v1/parties')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${userToken}`)
             .send(newParty)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -47,7 +54,7 @@ describe('Admin activities', () => {
         it(' should not delete a party if is not admin', (done) => {
             chai.request(app)
             .post('/api/v1/parties')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${userToken}`)
             .send(newParty)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -58,7 +65,7 @@ describe('Admin activities', () => {
         it(' should not register a office if you are not admin', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${userToken}`)
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -69,7 +76,7 @@ describe('Admin activities', () => {
         it(' should not register a office without token', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${userToken}`)
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -81,7 +88,7 @@ describe('Admin activities', () => {
         it(' should not find office when database has errors', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${userToken}`)
             .send({
                 type: "this is the type",
                 name: "this is the name",
@@ -128,5 +135,56 @@ describe('Admin activities', () => {
             done();
 
         });
+
+        it('should not edit party when no token generated', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer `)
+            .send(newParty)
+            .end((err,res) =>{
+                res.should.have.status(400)
+            })
+            done()
+        });
+
+        it('should not edit party when is not admin', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${userToken}`)
+            .send(newParty)
+            .end((err,res) =>{
+                res.should.have.status(400)
+            })
+            done()
+        });
+
+        it('should not edit party when is not found in database', (done) => {
+            chai.request(app).patch('/api/v1/parties/7')
+            .set('Authorization', `bearer ${adminToken}`)
+            .send(newParty)
+            .end((err,res) =>{
+                res.should.have.status(404)
+            })
+            done()
+        });
+
+        it('should not edit party when is empty field', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${adminToken}`)
+            .send(incompleteParty)
+            .end((err,res) =>{
+                res.should.have.status(400)
+            })
+            done()
+        });
+
+        it('should edit party when all data is correct', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${adminToken}`)
+            .send(newParty)
+            .end((err,res) =>{
+                res.should.have.status(200)
+            })
+            done()
+        });
+
     })
 })
