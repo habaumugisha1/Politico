@@ -128,6 +128,19 @@ static getAllOffice(req, res){
     })
 }
 
+static getSingleOffice(req, res){
+    pool.connect(async (err, myClient) =>{
+        // looking if party is exists'
+        const officeId = parseInt(req.params.singleOfficeId, 10);
+        if (!Number.isInteger(officeId)) return res.status(400).json({status:400, message: 'Please Id should be number'})
+        const isOffice = await myClient.query(`SELECT id, type, name FROM offices WHERE id=$1;`, [officeId]);
+        
+            if(isOffice.rows.length === 0) return res.status(404).json({status:404,message:`Office with id of ${officeId} is not found`});
+            return res.status(200).json({status:200, data:isOffice.rows});
+    })
+};
+
+
 }
 
 export default Users;

@@ -22,6 +22,7 @@ router.delete('/parties/:id', Authorize.isAdmin, Admin.deleteParty);
 
 //get offices
 router.get('/offices', Users.getAllOffice);
+router.get('/offices/:singleOfficeId', Users.getSingleOffice);
 
 
  export default router;

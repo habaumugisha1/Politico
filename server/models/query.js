@@ -18,6 +18,10 @@ export const getAllOffices = `
 SELECT id, type, name FROM offices ORDER BY id ASC;
 `;
 
+const singleOffice = `
+
+`
+
 export const isPartyExist = `
 SELECT * FROM party WHERE name=$1;
 `;
