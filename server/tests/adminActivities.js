@@ -24,16 +24,7 @@ const incompleteParty ={
 }
 
 describe('Admin activities', () => {
-    before((done) => {
-        chai.request(app)
-        .post('/api/v1/auth/login')
-        .send({email:"habajeune1@gmail.com", password:"qwertyuiop"})
-        .end((err, res) => {
-            global.AuthUser = res.body.Data;
-            console.log(userToken)
-        });
-        done();
-    });
+    
 
     describe('create party', () => {
         const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
@@ -62,6 +53,7 @@ describe('Admin activities', () => {
             done();
 
         });
+
         it(' should not register a office if you are not admin', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
@@ -104,7 +96,7 @@ describe('Admin activities', () => {
         it(' when office is found in database should return office is already registered', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${adminToken}`)
             .end((err, res) => {
                 res.should.have.status(401);
             });
@@ -115,7 +107,7 @@ describe('Admin activities', () => {
         it('when there is error in saving a new office return 400 error code status ', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${adminToken}`)
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -127,7 +119,7 @@ describe('Admin activities', () => {
         it('when there is error occured return 400 error code status ', (done) => {
             chai.request(app)
             .post('/api/v1/offices')
-            .set('Athorization', `bearer ${global.AuthUser}`)
+            .set('Athorization', `bearer ${adminToken}`)
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
@@ -166,26 +158,37 @@ describe('Admin activities', () => {
             done()
         });
 
-        it('should not edit party when is not found in database', (done) => {
-            chai.request(app).patch('/api/v1/parties/7')
-            .set('Authorization', `bearer ${adminToken}`)
-            .send(newParty)
+        
+        
+        
+        it('should not edit party when all data is incorrect', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${userToken}`)
+            .send(incompleteParty)
             .end((err,res) =>{
-                res.should.have.status(404)
+                res.should.have.status(400)
             })
             done()
         });
 
-        
-
-        it('should edit party when all data is correct', (done) => {
-            chai.request(app).patch('/api/v1/parties/1')
+        it('should not edit party when is not found in database', (done) => {
+            chai.request(app).patch('/api/v1/parties/789')
             .set('Authorization', `bearer ${adminToken}`)
             .send(newParty)
             .end((err,res) =>{
-                res.should.have.status(200)
+                res.should.have.status(400)
+                });
+                    done();
+            });
+
+        it('should not party when you are not admin and data is incomplete', (done) => {
+            chai.request(app).patch('/api/v1/parties/1')
+            .set('Authorization', `bearer ${userToken}`)
+            .send(incompleteParty)
+            .end((err,res) =>{
+                res.should.have.status(400)
             })
-            done()
+            done();
         });
 
     })

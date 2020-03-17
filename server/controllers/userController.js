@@ -52,7 +52,7 @@ class Users{
                                        firstName: user.firstName,
                                        lastName: user.lastName,
                                      }, 'SECRETEKEY', (error,token)=>{
-                                         if (error) return res.status(400).json({ status: 403, message:'check me 3', err: error });
+                                         if (error) return res.status(400).json({ status: 400, message:'check me 3', err: error });
                                          return res.status(201).json({status:201, message:'Your account succful created!', data: token, userData:user})
                                      })
                                     }).catch((err) => res.status(400).json({status:400, message:'check me 4', errors:err}) 
@@ -108,7 +108,7 @@ static getParties(req, res){
 
 static getSingleParty(req, res){
     pool.connect(async (err, myClient) =>{
-        if(err) return res.status(400).json({status:400, erro:err});
+        // if(err) return res.status(400).json({status:400, erro:err});
         // looking if party is exists'
         const singlePartyId = parseInt(req.params.partyId, 10);
         if (!Number.isInteger(singlePartyId)) return res.status(400).json({status:400, message: 'Please Id should be number'})

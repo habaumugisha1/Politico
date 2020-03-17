@@ -39,15 +39,12 @@ class Admin{
                if (findParty.rows.length === 0) return res.status(404).json({status:404, message:'Party you are trying to update is not found!'});
               
                if(findParty){
-                    try {
+                
                   
                      await myClient.query('UPDATE party SET name=$1, hdAdress=$2, logoUrl=$3  WHERE id=$4', [req.body.name, req.body.hdAdress, req.body.logoUrl, req.params.partyId]);
                      
                      return res.status(200).json({status:200, message:`Party ${findParty.rows[0].name} it chenged to ${req.body.name} edited successful!`})
-                    }
-                    catch (err){
-                          return res.status(400).json({status:400, message:'error occured',errors:err})
-                       }
+                    
                     }
         })
     }
