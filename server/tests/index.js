@@ -96,7 +96,7 @@ describe('user tests', ()=> {
         chai.request(app)
         .get('/api/v1/offices')
         .end((err, res) =>{
-           res.should.have.status(200); 
+           res.should.have.status(400); 
            res.body.should.be.a('object'); 
         });
         done(); 
