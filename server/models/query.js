@@ -14,6 +14,10 @@ export const getAllParties = `
 SELECT id, name, logourl FROM party ORDER BY id ASC;
 `;
 
+export const getAllOffices = `
+SELECT id, type, name FROM offices ORDER BY id ASC;
+`;
+
 export const isPartyExist = `
 SELECT * FROM party WHERE name=$1;
 `;

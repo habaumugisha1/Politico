@@ -70,82 +70,6 @@ describe('user tests', ()=> {
             done();
     });
 
-    it('user should not create account with emptydata', (done) =>{
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send({})
-        .end((err, res) =>{
-           res.should.have.status(400); 
-        });
-        done();
-
-    });
-
-    // it('user should not create account with problems in db connect', (done) =>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/signUp')
-    //     .send(newuser)
-    //     .end((err, res) =>{
-    //        res.should.have.status(400); 
-    //     });
-    //     done();
-
-    // });
-
-    it('user should not create account when email is exist in db', (done) =>{
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send({firstName: 'jonathanu',
-        lastName: 'kukutodhgch',
-        passportUrl:'./UI/images/user.jpeg',
-        email: 'habajeune1@gmail.com',
-        password: 'qwertyuiop',
-        isAdmin: 'false',
-        userRole: 'user'})
-        .end((err, res) =>{
-           res.should.have.status(400);
-           res.body.should.have.property('err');
-        });
-        done();
-
-    });
-
-    // it('user should not create account when password is not hashed', (done) =>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/signUp')
-    //     .send(newuser)
-    //     .end((err, res) =>{
-    //        res.should.have.status(400); 
-    //     });
-    //     done();
-
-    // });
-
-    // it('user should not create account without email', (done) =>{
-    //     chai.request(app)
-    //     .post('/api/v1/auth/signUp')
-    //     .send(userNoEmail)
-    //     .end((err, res) =>{
-    //        res.should.have.status(404); 
-    //     });
-    //     done(); 
-    // });
-    it('user should create account with full data', (done) =>{
-        chai.request(app)
-        .post('/api/v1/auth/signUp')
-        .send({firstName: 'jonathanu',
-        lastName: 'kukutodhgch',
-        passportUrl:'./UI/images/user.jpeg',
-        email: 'jonathanu9@gmail.com',
-        password: '1234567890',
-        isAdmin: 'false',
-        userRole: 'user'})
-        .end((err, res) =>{
-           res.should.have.status(201); 
-           res.body.should.have.be.a('object');
-        });
-        done(); 
-    });
 
 
     it('should not get a single party when id is not number', (done) =>{
@@ -157,20 +81,23 @@ describe('user tests', ()=> {
         done(); 
     });
     
-    it('should not get a single party when id is not found', (done) =>{
-        chai.request(app)
-        .get('/api/v1/parties/30')
-        .end((err, res) =>{
-           res.should.have.status(404); 
-        });
-        done(); 
-    });
+    
 
     it('should get a single party when id is valid', (done) =>{
         chai.request(app)
         .get('/api/v1/parties/kk')
         .end((err, res) =>{
            res.should.have.status(200); 
+        });
+        done(); 
+    });
+
+    it('should get all offices', (done) =>{
+        chai.request(app)
+        .get('/api/v1/offices')
+        .end((err, res) =>{
+           res.should.have.status(200); 
+           res.body.should.be.a('object'); 
         });
         done(); 
     });

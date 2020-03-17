@@ -5,7 +5,7 @@ import isValid from '../helper/valiMiddle'
 import imageUrl from '../helper/image'
 
 import { pool } from '../models/db';
-import {signUpUser, isUserExist, getAllParties} from '../models/query'
+import {signUpUser, isUserExist, getAllParties, getAllOffices} from '../models/query'
 
 
 class Users{
@@ -108,7 +108,6 @@ static getParties(req, res){
 
 static getSingleParty(req, res){
     pool.connect(async (err, myClient) =>{
-        // if(err) return res.status(400).json({status:400, erro:err});
         // looking if party is exists'
         const singlePartyId = parseInt(req.params.partyId, 10);
         if (!Number.isInteger(singlePartyId)) return res.status(400).json({status:400, message: 'Please Id should be number'})
@@ -116,6 +115,16 @@ static getSingleParty(req, res){
         
             if(isParty.rows.length === 0) return res.status(404).json({status:404,message:`Party with id of ${singlePartyId} is not found`});
             return res.status(200).json({status:200, data:isParty.rows});
+    })
+};
+
+static getAllOffice(req, res){
+    pool.connect( async(error, myClient) => {
+        if(error) return res.status(400).json({status:400, err:error});
+        const offices = await myClient.query(getAllOffices);
+        if(offices.rows.length===0) return res.status(404).json({status:404, message:"No office avairable"}) 
+
+        return res.status(200).json({status:200, data:offices.rows})
     })
 }
 

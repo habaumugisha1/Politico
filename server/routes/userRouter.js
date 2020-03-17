@@ -20,6 +20,10 @@ router.get('/parties', Users.getParties);
 router.get('/parties/:partyId', Users.getSingleParty);
 router.delete('/parties/:id', Authorize.isAdmin, Admin.deleteParty);
 
+//get offices
+router.get('/offices', Users.getAllOffice);
+
+
  export default router;
 
  
