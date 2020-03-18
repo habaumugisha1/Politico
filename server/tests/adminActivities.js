@@ -238,7 +238,7 @@ describe('should not edit party', () =>{
 
     it('should not edit party when is not found in database', (done) => {
         chai.request(app).patch('/api/v1/parties/789')
-        .set('Authorization', `${adminToken}`)
+        .set('authorization', `bearer ${adminToken}`)
         .send(newParty)
         .end((err,res) =>{
             res.should.have.status(404)
