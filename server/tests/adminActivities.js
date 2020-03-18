@@ -242,6 +242,7 @@ describe('should not edit party', () =>{
         .send(newParty)
         .end((err,res) =>{
             res.should.have.status(404)
+            console.log(res.body)
             done();
             });
         });
