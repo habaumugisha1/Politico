@@ -1,6 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http'
+import { before } from 'mocha';
 import testUser from './damyData/userData';
+import { pool } from '../models/db'
 import adminController from '../controllers/adminController'
 import app from '../index';
 
@@ -11,6 +13,20 @@ let userToken;
 const newOffice = {
     type: "local government",
     name:""
+}
+
+const candidate ={
+    office: "2",
+    party: "ubumwe", 
+    candidate: "2", 
+    careatedOn: "2020-03-13 08:04:03.381"
+}
+const fakeCandidate = {
+
+}
+const adminCredentials ={
+    email:"habajeune1@gmail.com",
+    password:"qwertyuiop"
 }
 const newParty ={
     name: "inkingi",
@@ -27,9 +43,19 @@ describe('Admin activities', () => {
     
 
     describe('create party', () => {
+
+        // before((done) => {
+        //     request(server).post('/api/v1/auth/login')
+        //       .send(adminCredentials).end((err, res) => {
+        //         global.userToken = res.body.Data;
+        //         done();
+        //       });
+           
+        //   });
+
         const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
         const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZXMyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImhhYnVtdWdpc2hhIiwibGFzdE5hbWUiOiJhbWkgZGVzIGpldW5lcyIsImlzQWRtaW4iOnRydWUsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODQ0MzcwNDF9.cDvBpJ2yciz_qi6MazcXdSG8zRgC24PUzvuCy8upnxs";
-        
+       
         it(' should not create a new party if is not admin', (done) => {
             chai.request(app)
             .post('/api/v1/parties')
@@ -191,5 +217,35 @@ describe('Admin activities', () => {
             done();
         });
 
+        it('should not register candidate when not token provided', (done) => {
+            chai.request(app).post('/api/v1/offices/2/register')
+            .set('Authorization', `bearer `)
+            .send(candidate)
+            .end((err, res) => {
+                res.should.have.status(400)
+            });
+            done();
+        });
+
+        it('should not register candidate if you are not admin', (done)=> {
+            chai.request(app).post('/api/v1/offices/2/register')
+            .set('Authorization', `bearer ${userToken}`)
+            .send(candidate)
+            .end((err, res) => {
+                res.should.have.status(404)
+            })
+            done(); 
+        })
+
+        it('should not register candidate if no data provided', (done)=> {
+            chai.request(app).post('/api/v1/offices/2/register')
+            .set('Authorization', `bearer ${adminToken}`)
+            .send(fakeCandidate)
+            .end((err, res) => {
+                res.should.have.status(400)
+            })
+            done(); 
+        })
+    // })
     })
 })
