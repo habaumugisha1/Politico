@@ -29,7 +29,12 @@ export default {
         officeSchema : Joi.object().keys({
            type: Joi.string().trim().required(),
            name:Joi.string().trim().required()
-        })
+        }),
+
+        candidateSchema : Joi.object().keys({
+         party:Joi.string().required(),
+         email: Joi.string().email().required()
+      })
    
      },
      isValid: (schema) => {
