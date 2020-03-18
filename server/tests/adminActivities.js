@@ -63,8 +63,8 @@ describe('Admin activities', () => {
             .send(newParty)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -75,8 +75,8 @@ describe('Admin activities', () => {
             .send(newParty)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -87,8 +87,8 @@ describe('Admin activities', () => {
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
         it(' should not register a office without token', (done) => {
@@ -98,8 +98,8 @@ describe('Admin activities', () => {
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -114,8 +114,8 @@ describe('Admin activities', () => {
             })
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -125,8 +125,8 @@ describe('Admin activities', () => {
             .set('Athorization', `bearer ${adminToken}`)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -137,8 +137,8 @@ describe('Admin activities', () => {
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -149,8 +149,8 @@ describe('Admin activities', () => {
             .send(newOffice)
             .end((err, res) => {
                 res.should.have.status(401);
+                done();
             });
-            done();
 
         });
 
@@ -160,8 +160,8 @@ describe('Admin activities', () => {
             .send(newParty)
             .end((err,res) =>{
                 res.should.have.status(400)
+                done()
             })
-            done()
         });
 
         it('should not edit party when is not admin', (done) => {
@@ -170,8 +170,8 @@ describe('Admin activities', () => {
             .send(newParty)
             .end((err,res) =>{
                 res.should.have.status(400)
+                done();
             })
-            done()
         });
 
         it('should not edit party when is empty field', (done) => {
@@ -193,19 +193,11 @@ describe('Admin activities', () => {
             .send(incompleteParty)
             .end((err,res) =>{
                 res.should.have.status(400)
+                done()
             })
-            done()
         });
 
-        it('should not edit party when is not found in database', (done) => {
-            chai.request(app).patch('/api/v1/parties/789')
-            .set('Authorization', `bearer ${adminToken}`)
-            .send(newParty)
-            .end((err,res) =>{
-                res.should.have.status(400)
-                });
-                    done();
-            });
+       
 
         it('should not party when you are not admin and data is incomplete', (done) => {
             chai.request(app).patch('/api/v1/parties/1')
@@ -222,40 +214,49 @@ describe('Admin activities', () => {
             .set('Authorization', `bearer `)
             .send(candidate)
             .end((err, res) => {
+                console.log(res.body)
                 res.should.have.status(400)
+                done();
             });
-            done();
         });
 
-        it('should not register candidate if you are not admin', (done)=> {
-            chai.request(app).post('/api/v1/offices/2/register')
-            .set('Authorization', `bearer ${userToken}`)
-            .send(candidate)
-            .end((err, res) => {
-                res.should.have.status(404)
-            })
-            done(); 
-        })
-
-        // it('should not register candidate if no data provided', (done)=> {
-        //     chai.request(app).post('/api/v1/offices/2/register')
-        //     .set('Authorization', `bearer ${adminToken}`)
-        //     .send(fakeCandidate)
-        //     .end((err, res) => {
-        //         res.should.have.status(400)
-        //     })
-        //     done(); 
-        // });
-
-    // })
+        
     it('should not register candidate office is not found', (done)=> {
         chai.request(app).post('/api/v1/offices/40/register')
         .set('Authorization', `bearer ${adminToken}`)
         .send(fakeCandidate)
         .end((err, res) => {
             res.should.have.status(400)
+            done(); 
+        });
         })
-        done(); 
-    });
+    })
+})
+
+describe('should not edit party', () =>{
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
+
+    it('should not edit party when is not found in database', (done) => {
+        chai.request(app).patch('/api/v1/parties/789')
+        .set('Authorization', `bearer ${adminToken}`)
+        .send(newParty)
+        .end((err,res) =>{
+            res.should.have.status(404)
+            done();
+            });
+        });
+})
+
+describe('should not register candidate if you are not admin', ()=>{
+    const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZXMyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImhhYnVtdWdpc2hhIiwibGFzdE5hbWUiOiJhbWkgZGVzIGpldW5lcyIsImlzQWRtaW4iOnRydWUsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODQ0MzcwNDF9.cDvBpJ2yciz_qi6MazcXdSG8zRgC24PUzvuCy8upnxs";
+
+    it('should not register candidate if you are not admin', (done)=> {
+        chai.request(app).post('/api/v1/offices/2/register')
+        .set('Authorization', `bearer ${userToken}`)
+        .send(candidate)
+        .end((err, res) => {
+            res.should.have.status(400)
+            done(); 
+        })
     })
 })
