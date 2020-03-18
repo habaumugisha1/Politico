@@ -64,6 +64,7 @@ describe('user tests', ()=> {
             .get('/api/v1/home')
             .end((err, res) =>{
                 res.should.have.status(200);
+                console.log(res);
                 res.body.should.have.property('message');
                 
             });
