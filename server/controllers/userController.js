@@ -51,7 +51,7 @@ class Users{
                                        userRole:user.userRole,
                                        firstName: user.firstName,
                                        lastName: user.lastName,
-                                     }, 'SECRETEKEY', (error,token)=>{
+                                     }, process.env.SECRET_KEY, (error,token)=>{
                                          if (error) return res.status(400).json({ status: 400, message:'check me 3', err: error });
                                          return res.status(201).json({status:201, message:'Your account succful created!', data: token, userData:user})
                                      })
@@ -85,7 +85,7 @@ static userLogIn (req,res){
                             isAdmin:user.rows[0].isadmin,
                             userRole:user.rows[0].userrole
                          };
-                        jwt.sign(logedInUserData, 'SECRETEKEY', (er, token)=>{
+                        jwt.sign(logedInUserData, process.env.SECRET_KEY, (er, token)=>{
                              if(er) return res.status(400).json({status:400, message:er})
                             return res.status(200).json({status:200,message:'Logined successful', Data:token, userData:logedInUserData})
                          })
@@ -110,7 +110,8 @@ static getSingleParty(req, res){
     pool.connect(async (err, myClient) =>{
         // looking if party is exists'
         const singlePartyId = parseInt(req.params.partyId, 10);
-        if (!Number.isInteger(singlePartyId)) return res.status(400).json({status:400, message: 'Please Id should be number'})
+        if (!Number.isInteger(singlePartyId)) return res.status(404).json({status:404, message: 'Please Id should be number'});
+        console.log(res.body)
         const isParty = await myClient.query(`SELECT * FROM party WHERE id=$1;`, [singlePartyId]);
         
             if(isParty.rows.length === 0) return res.status(404).json({status:404,message:`Party with id of ${singlePartyId} is not found`});

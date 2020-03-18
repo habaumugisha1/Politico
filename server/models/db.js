@@ -12,6 +12,6 @@ export const pool = new Pool(config)
 
 
 
-// module.exports = {createTables}
+
 
 

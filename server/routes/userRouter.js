@@ -24,6 +24,11 @@ router.delete('/parties/:id', Authorize.isAdmin, Admin.deleteParty);
 router.get('/offices', Users.getAllOffice);
 router.get('/offices/:singleOfficeId', Users.getSingleOffice);
 
+// register a candidate
+router.post('/offices/:officeId/register', Authorize.isAdmin, validation.isValid(validation.schema.candidateSchema), Admin.candidateRegister)
+
+
+
 
  export default router;
 

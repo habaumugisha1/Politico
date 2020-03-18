@@ -59,47 +59,47 @@ describe('user tests', ()=> {
         userRole: 'user'
       }
 
-    it('user should get home page', (done) => {
-        chai.request(app)
-            .get('/api/v1/home')
-            .end((err, res) =>{
-                res.should.have.status(200);
-                res.body.should.have.property('message');
-                
-            });
-            done();
-    });
-
 
 
     it('should not get a single party when id is not number', (done) =>{
         chai.request(app)
         .get('/api/v1/parties/hjk')
         .end((err, res) =>{
-           res.should.have.status(400); 
+           res.should.have.status(404); 
+           done(); 
         });
-        done(); 
     });
     
     
 
+    
+
+})
+
+describe('home page', () =>{
+    it('user should get home page', (done) => {
+        chai.request(app)
+            .get('/api/v1/home')
+            .end((err, res) =>{
+                // res.should.have.status(200);
+                res.body.status.should.equal(200);
+                console.log(res.body);
+                res.body.should.have.property('message');
+                res.body.should.have.property('status');
+                
+                done();
+            });
+    });
+
+})
+
+describe('get a single party', () => {
     it('should get a single party when id is valid', (done) =>{
         chai.request(app)
-        .get('/api/v1/parties/kk')
+        .get('/api/v1/parties/1')
         .end((err, res) =>{
            res.should.have.status(200); 
         });
         done(); 
     });
-
-    it('should get all offices', (done) =>{
-        chai.request(app)
-        .get('/api/v1/offices')
-        .end((err, res) =>{
-           res.should.have.status(400); 
-           
-        });
-        done(); 
-    });
-
 })

@@ -102,5 +102,45 @@ class Admin{
 
 
     }
+
+    static candidateRegister(req, res){
+        pool.connect(async (err, results) =>{
+            if(err) return res.status(400).json({status:400, errors:err});
+
+            const findOffice = results.query('SELECT * FROM offices WHERE id=$1', [req.params.officeId])
+            // console.log(`office id ${findOffice.rows.id}`)
+            findOffice.then(async(data) =>{
+                if(data.rows.length===0) return res.status(400).json({status:400, message:`this office with id ${req.params.officeId} is not found`});
+                const candidatess = await results.query('SELECT * FROM users WHERE email=$1', [req.body.email]);
+                // console.log(`candidate id ${candidate.rows[0].id}`)
+                if(candidatess.rows.length===0) return res.status(404).json({status:404, message:`this user with email ${req.body.email} is not found`});
+               
+                if(candidatess) {
+                    const newCandidate={
+                       office: data.rows[0].id,
+                        party: req.body.party, 
+                        candidate: candidatess.rows[0].id, 
+                        careatedOn: new Date()
+                    };
+
+                     const findCand = await results.query('SELECT * FROM candidates WHERE candidate=$1',[candidatess.rows[0].id]);
+
+                    //  console.log("registred" + findCand.rows);
+
+
+                     if(findCand.rows.length>0) return res.status(400).json({status:400, message:"candidate is already registered"})
+
+                     const register = results.query('INSERT INTO candidates(office,party, candidate, careatedOn) VALUES($1,$2,$3,$4)', [ data.rows[0].id, req.body.party, candidatess.rows[0].id, new Date()]);
+                     register.then((newData) => {
+
+                        //   console.log(`new cand ${newData.rows}`)
+                          return res.status(201).json({status:201, message:'new candidate registered successful', data:newCandidate, regi:newData.rows})
+                      }).catch((er) => res.status(400).json({status:400, message:"something went wrong 1", errors:er}));
+                }
+             }).catch((error) =>res.status(400).json({status:400, message:"something went wrong", err:error}));
+
+
+        })
+    }
 }
 export default Admin;
