@@ -63,12 +63,14 @@ describe('user tests', ()=> {
         chai.request(app)
             .get('/api/v1/home')
             .end((err, res) =>{
-                res.should.have.status(200);
-                console.log(res);
+                // res.should.have.status(200);
+                res.body.status.should.equal(200);
+                console.log(res.body);
                 res.body.should.have.property('message');
+                res.body.should.have.property('status');
                 
+                done();
             });
-            done();
     });
 
 
