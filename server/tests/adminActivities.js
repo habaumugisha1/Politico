@@ -21,6 +21,19 @@ const candidate ={
     candidate: "2", 
     careatedOn: "2020-03-13 08:04:03.381"
 }
+
+const fhCandidate ={
+    office: "1789",
+    party: "ubumwe", 
+    candidate: "2", 
+    careatedOn: "2020-03-13 08:04:03.381"
+}
+const fhkCandidate ={
+    office: "1789",
+    party: "ubumwe", 
+    candidate: "122", 
+    careatedOn: "2020-03-13 08:04:03.381"
+}
 const fakeCandidate = {
 
 }
@@ -219,7 +232,7 @@ describe('Admin activities', () => {
                 done();
             });
         });
-
+        // with full infomation
         
     it('should not register candidate if office is not found', (done)=> {
         chai.request(app).post('/api/v1/offices/40/register')
@@ -267,6 +280,34 @@ describe('should not register candidate if user is not signed up', ()=>{
         chai.request(app).post('/api/v1/offices/2/register')
         .set('Authorization', `bearer ${adminToken}`)
         .send(candidate)
+        .end((err, res) => {
+            res.should.have.status(400)
+            done(); 
+        })
+    })
+})
+
+describe('should not register candidate if no office', ()=>{
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
+
+    it('should not register candidate if office is not found', (done)=> {
+        chai.request(app).post('/api/v1/offices/1789/register')
+        .set('Authorization', `bearer ${adminToken}`)
+        .send(fhCandidate)
+        .end((err, res) => {
+            res.should.have.status(400)
+            done(); 
+        })
+    })
+})
+
+describe('should not register candidate if  no user', ()=>{
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
+
+    it('should not register candidate if no user', (done)=> {
+        chai.request(app).post('/api/v1/offices/2/register')
+        .set('Authorization', `bearer ${adminToken}`)
+        .send(fhkCandidate)
         .end((err, res) => {
             res.should.have.status(400)
             done(); 
