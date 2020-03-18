@@ -76,7 +76,7 @@ describe('user tests', ()=> {
         chai.request(app)
         .get('/api/v1/parties/hjk')
         .end((err, res) =>{
-           res.should.have.status(400); 
+           res.should.have.status(404); 
         });
         done(); 
     });
