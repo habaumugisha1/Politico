@@ -245,7 +245,17 @@ describe('Admin activities', () => {
                 res.should.have.status(400)
             })
             done(); 
-        })
+        });
+
     // })
+    it('should not register candidate office is not found', (done)=> {
+        chai.request(app).post('/api/v1/offices/40/register')
+        .set('Authorization', `bearer ${adminToken}`)
+        .send(fakeCandidate)
+        .end((err, res) => {
+            res.should.have.status(404)
+        })
+        done(); 
+    });
     })
 })
