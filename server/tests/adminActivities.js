@@ -233,19 +233,19 @@ describe('Admin activities', () => {
     })
 })
 
-describe('should not edit party', () =>{
-    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
-    it('should not edit party when is not found in database', (done) => {
-        chai.request(app).patch('/api/v1/parties/789')
-        .set('Authorization', `bearer ${adminToken}`)
-        .send(newParty)
-        .end((err,res) =>{
-            console.log(res.body)
-            res.should.have.status(404)
-            done();
-            });
-        });
-})
+// describe('should not edit party', () =>{
+//     const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
+//     it('should not edit party when is not found in database', (done) => {
+//         chai.request(app).patch('/api/v1/parties/789')
+//         .set('Authorization', `bearer ${adminToken}`)
+//         .send(newParty)
+//         .end((err,res) =>{
+//             console.log(res.body)
+//             res.should.have.status(404)
+//             done();
+//             });
+//         });
+// })
 
 describe('should not register candidate if you are not admin', ()=>{
     const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZXMyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImhhYnVtdWdpc2hhIiwibGFzdE5hbWUiOiJhbWkgZGVzIGpldW5lcyIsImlzQWRtaW4iOnRydWUsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODQ0MzcwNDF9.cDvBpJ2yciz_qi6MazcXdSG8zRgC24PUzvuCy8upnxs";
