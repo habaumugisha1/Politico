@@ -110,7 +110,7 @@ class Admin{
             const findOffice = results.query('SELECT * FROM offices WHERE id=$1', [req.params.officeId])
             // console.log(`office id ${findOffice.rows.id}`)
             findOffice.then(async(data) =>{
-                if(data.rows.length===0) return res.status(404).json({status:404, message:`this office with id ${req.params.officeId} is not found`});
+                if(data.rows.length===0) return res.status(400).json({status:400, message:`this office with id ${req.params.officeId} is not found`});
                 const candidatess = await results.query('SELECT * FROM users WHERE email=$1', [req.body.email]);
                 // console.log(`candidate id ${candidate.rows[0].id}`)
                 if(candidatess.rows.length===0) return res.status(404).json({status:404, message:`this user with email ${req.body.email} is not found`});

@@ -92,14 +92,4 @@ describe('user tests', ()=> {
         done(); 
     });
 
-    it('should get all offices', (done) =>{
-        chai.request(app)
-        .get('/api/v1/offices')
-        .end((err, res) =>{
-           res.should.have.status(400); 
-           
-        });
-        done(); 
-    });
-
 })
