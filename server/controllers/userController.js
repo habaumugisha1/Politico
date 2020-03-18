@@ -51,7 +51,7 @@ class Users{
                                        userRole:user.userRole,
                                        firstName: user.firstName,
                                        lastName: user.lastName,
-                                     }, 'SECRETEKEY', (error,token)=>{
+                                     }, process.env.SECRETE_KEY, (error,token)=>{
                                          if (error) return res.status(400).json({ status: 400, message:'check me 3', err: error });
                                          return res.status(201).json({status:201, message:'Your account succful created!', data: token, userData:user})
                                      })
@@ -85,7 +85,7 @@ static userLogIn (req,res){
                             isAdmin:user.rows[0].isadmin,
                             userRole:user.rows[0].userrole
                          };
-                        jwt.sign(logedInUserData, 'SECRETEKEY', (er, token)=>{
+                        jwt.sign(logedInUserData, process.env.SECRETE_KEY, (er, token)=>{
                              if(er) return res.status(400).json({status:400, message:er})
                             return res.status(200).json({status:200,message:'Logined successful', Data:token, userData:logedInUserData})
                          })

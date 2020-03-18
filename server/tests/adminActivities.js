@@ -234,15 +234,14 @@ describe('Admin activities', () => {
 })
 
 describe('should not edit party', () =>{
-    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
-
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
     it('should not edit party when is not found in database', (done) => {
         chai.request(app).patch('/api/v1/parties/789')
-        .set('authorization', `bearer ${adminToken}`)
+        .set('Authorization', `bearer ${adminToken}`)
         .send(newParty)
         .end((err,res) =>{
-            res.should.have.status(404)
             console.log(res.body)
+            res.should.have.status(404)
             done();
             });
         });

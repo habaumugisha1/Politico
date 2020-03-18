@@ -99,7 +99,7 @@ describe('get a single party', () => {
         .get('/api/v1/parties/1')
         .end((err, res) =>{
            res.should.have.status(200); 
-           done(); 
         });
+        done(); 
     });
 })

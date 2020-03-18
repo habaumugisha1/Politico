@@ -9,7 +9,7 @@ class Authorize {
         const token = req.headers.authorization.split(' ')[1];
         let authUser;
 
-        jwt.verify(token, 'SECRETEKEY', (err, dataAdmin) => {
+        jwt.verify(token, process.env.SECRETE_KEY, (err, dataAdmin) => {
             
             if (err) return res.status(400).json({ status: 400, message: err });
             authUser=dataAdmin
