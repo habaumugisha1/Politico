@@ -53,7 +53,7 @@ describe('Admin activities', () => {
            
         //   });
 
-        const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDI5NDMyMX0.e1CTwOtEAa17dJOtd6bsJY9b6cBfeqRZpXhM77weVog";
+        const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI";
         const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZXMyQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6ImhhYnVtdWdpc2hhIiwibGFzdE5hbWUiOiJhbWkgZGVzIGpldW5lcyIsImlzQWRtaW4iOnRydWUsInVzZXJSb2xlIjoiYWRtaW4iLCJpYXQiOjE1ODQ0MzcwNDF9.cDvBpJ2yciz_qi6MazcXdSG8zRgC24PUzvuCy8upnxs";
        
         it(' should not create a new party if is not admin', (done) => {
@@ -156,10 +156,10 @@ describe('Admin activities', () => {
 
         it('should not edit party when no token generated', (done) => {
             chai.request(app).patch('/api/v1/parties/1')
-            .set('Authorization', `bearer `)
+            // .set('Authorization', `bearer `)
             .send(newParty)
             .end((err,res) =>{
-                res.should.have.status(400)
+                res.should.have.status(401)
                 done()
             })
         });
@@ -177,7 +177,7 @@ describe('Admin activities', () => {
         it('should not edit party when is empty field', (done) => {
             chai.request(app).patch('/api/v1/parties/1')
             .set('Authorization', `bearer ${adminToken}`)
-            .send(incompleteParty)
+            .send({})
             .end((err,res) =>{
                 res.should.have.status(400)
             })
@@ -211,17 +211,17 @@ describe('Admin activities', () => {
 
         it('should not register candidate when not token provided', (done) => {
             chai.request(app).post('/api/v1/offices/2/register')
-            .set('Authorization', `bearer `)
+            // .set('Authorization', `bearer `)
             .send(candidate)
             .end((err, res) => {
                 console.log(res.body)
-                res.should.have.status(400)
+                res.should.have.status(401)
                 done();
             });
         });
 
         
-    it('should not register candidate office is not found', (done)=> {
+    it('should not register candidate if office is not found', (done)=> {
         chai.request(app).post('/api/v1/offices/40/register')
         .set('Authorization', `bearer ${adminToken}`)
         .send(fakeCandidate)
