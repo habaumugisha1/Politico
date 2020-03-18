@@ -260,3 +260,16 @@ describe('should not register candidate if you are not admin', ()=>{
         })
     })
 })
+describe('should not register candidate if user is not signed up', ()=>{
+    const adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhYmFqZXVuZTFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiaGFidW11Z2lzaGEiLCJsYXN0TmFtZSI6IkFtaSBkZXMgamV1bmVzIiwiaXNBZG1pbiI6dHJ1ZSwidXNlclJvbGUiOiJBZG1pbiIsImlhdCI6MTU4NDU1MTg3N30.m_N_txatZ8g2K-spnckuG9e4WaIURS7GqEdxxY09HGI"
+
+    it('should not register candidate if user is not correct', (done)=> {
+        chai.request(app).post('/api/v1/offices/2/register')
+        .set('Authorization', `bearer ${adminToken}`)
+        .send(candidate)
+        .end((err, res) => {
+            res.should.have.status(400)
+            done(); 
+        })
+    })
+})
