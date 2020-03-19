@@ -1,4 +1,6 @@
 import { pool } from '../models/db';
+// import userDecordedData from  '../helper/userDecorded'
+import jwt from 'jsonwebtoken'
 import isPartyExist from '../models/query'
 // import Office from '../helper/newObjects'
 import myParty from '../models/query'
@@ -139,6 +141,48 @@ class Admin{
                 }
              }).catch((error) =>res.status(400).json({status:400, message:"something went wrong", err:error}));
 
+
+        })
+    }
+
+    static candidateVote(req, res) {
+
+        pool.connect( async(err, myPool) => {
+            
+            const token = req.headers.authorization.split(' ')[1];
+            const tokenData = jwt.verify(token, process.env.SECRET_KEY);
+            // console.log(tokenData)
+            //find office is exists
+            myPool.query('SELECT * FROM offices WHERE id=$1', [req.params.officeId])
+            .then(async (office) => {
+                console.log(office.rows);
+                if(office.rows.length===0) return res.status(404).json({status:404, message:'this office is not found'});
+                if(office){
+                  const candidate = await myPool.query('SELECT * FROM candidates WHERE id=$1', [req.params.candidateId]);
+                  if(candidate.rows.length===0) return res.status(404).json({status:404, message:'this candidate is not available'});
+                //   console.log(candidate.rows);
+                  if(candidate){
+                      //find if not voted user 
+                      const findVote = await myPool.query('SELECT * FROM votes WHERE votedBy=$1 AND office=$2', [tokenData.id, office.rows[0].id]);
+                      if (findVote.rows.length>0) return res.status(400).json({status:400, message:'You have already voted in this office'});
+                      if(findVote.rows.length===0){
+                        //   console.log('start to vote now')
+                          const vote =0;
+                      const votesCounts = vote + 1;
+                    //   console.log(votesCounts);
+                      const votesData = {
+                          office:office.rows[0].id,
+                          candidate:candidate.rows[0].id,
+                          voter:tokenData.id
+                      }
+                      const voteQuery = myPool.query('INSERT INTO votes(date,office,candidate,votedBy,votes) VALUES ($1,$2,$3,$4,$5)', [new Date(),office.rows[0].id,candidate.rows[0].id,tokenData.id,votesCounts]);
+                      voteQuery.then((voting) =>{
+                          return res.status(201).json({status:201, message:'vote a candidate successful', data:votesData})
+                      }).catch((error) => res.status(400).json({status:400, message:'something went wrong', errors:error}))
+                    }
+                  }
+                }
+            }).catch((err) => res.status(400).json({status:400, message:'something went wrong 2', errors:err}))
 
         })
     }

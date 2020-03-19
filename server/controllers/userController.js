@@ -79,6 +79,7 @@ static userLogIn (req,res){
                             return res.status(400).json({ status: 400, messsage: 'invalid creadetial'});
                         }
                         const logedInUserData = {
+                            id :user.rows[0].id,
                             email: user.rows[0].email,
                             firstName: user.rows[0].firstname,
                             lastName: user.rows[0].lastname,

@@ -27,6 +27,9 @@ router.get('/offices/:singleOfficeId', Users.getSingleOffice);
 // register a candidate
 router.post('/offices/:officeId/register', Authorize.isAdmin, validation.isValid(validation.schema.candidateSchema), Admin.candidateRegister)
 
+// vote a candidate
+router.post('/offices/:officeId/:candidateId/vote',  Admin.candidateVote)
+
 
 
 
