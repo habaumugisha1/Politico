@@ -93,6 +93,31 @@ describe('home page', () =>{
 
 })
 
+describe('log in', () =>{
+    it('user should not log in when with empty email', (done) => {
+        chai.request(app)
+            .get('/api/v1/auth/login')
+            .send({password:"qwertyuiop"})
+            .end((err, res) =>{
+                console.log(res.body);
+                res.should.have.status(404);
+                done();
+            });
+    });
+
+})
+
+describe('get all party', () => {
+    it('should get all party', (done) =>{
+        chai.request(app)
+        .get('/api/v1/parties')
+        .end((err, res) =>{
+           res.should.have.status(200); 
+        });
+        done(); 
+    });
+})
+
 describe('get a single party', () => {
     it('should get a single party when id is valid', (done) =>{
         chai.request(app)
