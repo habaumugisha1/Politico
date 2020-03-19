@@ -29,7 +29,7 @@ router.post('/offices/:officeId/register', Authorize.isAdmin, validation.isValid
 
 // vote a candidate
 router.post('/offices/:officeId/:candidateId/vote',  Admin.candidateVote)
-
+router.get('/offices/:officeId/results', Users.getVoteResults);
 
 
 

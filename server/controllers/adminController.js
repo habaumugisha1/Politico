@@ -151,6 +151,7 @@ class Admin{
             
             const token = req.headers.authorization.split(' ')[1];
             const tokenData = jwt.verify(token, process.env.SECRET_KEY);
+            if(!tokenData) return res.status(400).json({status:400, message:'first login in order to vote'});
             // console.log(tokenData)
             //find office is exists
             myPool.query('SELECT * FROM offices WHERE id=$1', [req.params.officeId])
@@ -163,7 +164,7 @@ class Admin{
                 //   console.log(candidate.rows);
                   if(candidate){
                       //find if not voted user 
-                      const findVote = await myPool.query('SELECT * FROM votes WHERE votedBy=$1 AND office=$2', [tokenData.id, office.rows[0].id]);
+                      const findVote = await myPool.query('SELECT * FROM votes WHERE office=$1', [office.rows[0].id]);
                       if (findVote.rows.length>0) return res.status(400).json({status:400, message:'You have already voted in this office'});
                       if(findVote.rows.length===0){
                         //   console.log('start to vote now')
