@@ -155,3 +155,49 @@ describe('get a single party', () => {
         done(); 
     });
 })
+
+describe('get votes results ', () => {
+    it('should not get results when office is not found', (done) =>{
+        chai.request(app)
+        .get('/offices/30/results')
+        .end((err, res) =>{
+           res.should.have.status(404); 
+        });
+        done(); 
+    });
+})
+
+describe('get votes results ', () => {
+    it('should not get results when votes is not found', (done) =>{
+        chai.request(app)
+        .get('/offices/2/results')
+        .end((err, res) =>{
+           res.should.have.status(404); 
+        });
+        done(); 
+    });
+})
+
+describe('get votes results ', () => {
+    it('should not get results without office', (done) =>{
+        chai.request(app)
+        .get('/offices/2/results')
+        .end((err, res) =>{
+            console.log(res.body)
+           res.should.have.status(404); 
+           done(); 
+        });
+    });
+})
+
+describe('get votes results ', () => {
+    it('should get results when something went wrong', (done) =>{
+        chai.request(app)
+        .get('/offices/2/results')
+        .end((err, res) =>{
+            console.log(res.body)
+           res.should.have.status(404); 
+        });
+        done(); 
+    });
+})

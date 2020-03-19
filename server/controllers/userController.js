@@ -142,6 +142,28 @@ static getSingleOffice(req, res){
     })
 };
 
+static getVoteResults(req, res){
+    pool.connect( async (err, ourClient) => {
+      ourClient.query('SELECT * FROM offices WHERE id=$1', [req.params.officeId])
+      .then(async(office) =>{
+
+          console.log( office.rows)
+          console.log( '---------------------------------------------------')
+          if(office.rows.length===0) return res.status(404).json({status:404, message:'this is not found'});
+          const candidate = await ourClient.query('SELECT * FROM candidates WHERE office=$1', [req.params.officeId]);
+          console.log( candidate.rows)
+          console.log( '---------------------------------------------------')
+          const votess = await ourClient.query('SELECT * FROM votes WHERE office=$1', [office.rows[0].id])
+           if(votess.rows.length===0) return res.status(404).json({status:404, message:'no results found'})
+         
+          console.log( votess.rows)
+          
+        return res.status(200).json({status:200, message:'those are results', data:votess.rows})
+        //   console.log( '---------------------------------------------------')
+          
+      }).catch((err) => res.status(400).json({status:400, message:'something went wrong', errors:err}))
+    })
+}
 
 }
 
