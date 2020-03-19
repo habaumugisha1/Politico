@@ -320,11 +320,12 @@ describe('vote candidate ', ()=>{
 
     it('should not vote when office is not found', (done)=> {
         chai.request(app).post('/api/v1/offices/200/4/vote')
-        .set('Authorization', `bearer ${adminToken}`)
+        .set('authorization', `bearer ${adminToken}`)
         .end((err, res) => {
+            console.log(res.body)
             res.should.have.status(404)
-            done(); 
         })
+        done(); 
     })
 })
 
@@ -333,11 +334,11 @@ describe('vote candidate ', ()=>{
 
     it('should not vote when candidate is not found', (done)=> {
         chai.request(app).post('/api/v1/offices/2/100/vote')
-        .set('Authorization', `bearer ${adminToken}`)
+        .set('authorization', `bearer ${adminToken}`)
         .end((err, res) => {
             res.should.have.status(404)
-            done(); 
         })
+        done(); 
     })
 })
 
@@ -346,11 +347,11 @@ describe('vote candidate ', ()=>{
 
     it('should not vote twice', (done)=> {
         chai.request(app).post('/api/v1/offices/2/4/vote')
-        .set('Authorization', `bearer ${adminToken}`)
+        .set('authorization', `bearer ${adminToken}`)
         .end((err, res) => {
             res.should.have.status(400)
-            done(); 
         })
+        done(); 
     })
 })
 
@@ -359,10 +360,10 @@ describe('vote candidate ', ()=>{
 
     it('should not vote when all data are incorrect', (done)=> {
         chai.request(app).post('/api/v1/offices/2/4/vote')
-        .set('Authorization', `bearer ${adminToken}`)
+        .set('authorization', `bearer ${adminToken}`)
         .end((err, res) => {
             res.should.have.status(400)
-            done(); 
         })
+        done(); 
     })
 })
