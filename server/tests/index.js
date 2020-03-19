@@ -107,6 +107,33 @@ describe('log in', () =>{
 
 })
 
+describe('log in', () =>{
+    it('user should not log in when with password is incorrect', (done) => {
+        chai.request(app)
+            .get('/api/v1/auth/login')
+            .send({email:"habajeune1@gmail.com",password:"qwertyuio"})
+            .end((err, res) =>{
+                res.should.have.status(404);
+                console.log(res.body);
+                done();
+            });
+    });
+
+})
+describe('log in', () =>{
+    it('user should log in when email is incorrect', (done) => {
+        chai.request(app)
+            .get('/api/v1/auth/login')
+            .send({email:"habajeun@gmail.com",password:"qwertyuiop"})
+            .end((err, res) =>{
+                res.should.have.status(404);
+                console.log(res.body);
+                done();
+            });
+    });
+
+})
+
 describe('get all party', () => {
     it('should get all party', (done) =>{
         chai.request(app)
