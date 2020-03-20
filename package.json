@@ -4,7 +4,7 @@
   "description": "It is a platform which both the politicians and citizens can use. Politico enables citizens to give their mandate to politicians running for different government offices while building trust in the process through transparency.  hosted : https://habaumugisha1.github.io/Politico/UI/pages/index.html",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node server/index.js",
+    "start": "babel-node  ./server/index.js",
     "create": "babel-node ./server/models/db.js createTables ",
     "ami": "nodemon --exec babel-node ./server/index.js ",
     "test": "nyc mocha --require @babel/register ./server/tests/ --exit",
