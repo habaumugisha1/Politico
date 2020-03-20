@@ -6,7 +6,10 @@
   "scripts": {
     "create": "babel-node ./server/models/db.js createTables ",
     "ami": "nodemon --exec babel-node ./server/index.js ",
-    "start": "babel-node --require @babel/preset-env ./server/index.js",
+    "delete-build-folder": "rm -rf build && mkdir build",
+    "create-build-folder": "babel -d ./build ./server -s",
+    "initiate-build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/index.js",
     "test": "nyc mocha --require @babel/register ./server/tests/ --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
