@@ -6,7 +6,7 @@
   "scripts": {
     "create": "babel-node ./server/models/db.js createTables ",
     "ami": "nodemon --exec babel-node ./server/index.js ",
-    "start": "babel-node ./server/index.js",
+    "start": "babel-node --require @babel/preset-env ./server/index.js",
     "test": "nyc mocha --require @babel/register ./server/tests/ --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

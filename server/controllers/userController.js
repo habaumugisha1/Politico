@@ -155,7 +155,7 @@ static getVoteResults(req, res){
           console.log( '---------------------------------------------------')
           const votess = await ourClient.query('SELECT * FROM votes WHERE office=$1', [office.rows[0].id])
            if(votess.rows.length===0) return res.status(404).json({status:404, message:'no results found'})
-         
+          
           console.log( votess.rows)
           
         return res.status(200).json({status:200, message:'those are results', data:votess.rows})
