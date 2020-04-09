@@ -1,3 +1,4 @@
+// import make-runnable from 'make-runnable'
 import { pool } from './db'
 export const createTables = () => {
     const tables = `
