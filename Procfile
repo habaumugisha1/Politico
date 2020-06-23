@@ -1,2 +1,2 @@
 web: npm start,
-create: npm run create
+web: npm run create
